@@ -3,6 +3,7 @@ package com.walrusone.skywarsreloaded.menus;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.walrusone.skywarsreloaded.utilities.JSONMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -27,7 +28,6 @@ import com.walrusone.skywarsreloaded.listeners.ChatListener;
 import com.walrusone.skywarsreloaded.managers.MatchManager;
 import com.walrusone.skywarsreloaded.utilities.Messaging;
 
-import me.rayzr522.jsonmessage.JSONMessage;
 
 public class ArenaMenu {
 

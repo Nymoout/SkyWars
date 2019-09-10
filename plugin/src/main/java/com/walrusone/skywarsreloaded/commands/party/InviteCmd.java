@@ -1,6 +1,6 @@
 package com.walrusone.skywarsreloaded.commands.party;
 
-import me.rayzr522.jsonmessage.JSONMessage;
+import com.walrusone.skywarsreloaded.utilities.JSONMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

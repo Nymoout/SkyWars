@@ -2,9 +2,7 @@ package com.walrusone.skywarsreloaded.utilities;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-
 import com.walrusone.skywarsreloaded.SkyWarsReloaded;
-
 import me.clip.placeholderapi.external.EZPlaceholderHook;
 
 public class SWRPlaceholders extends EZPlaceholderHook {
