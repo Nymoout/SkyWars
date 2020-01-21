@@ -79,7 +79,7 @@ public class ChestAddCmd extends BaseCmd {
 			}
 		}
 		
-		SkyWarsReloaded.getCM().addItems(items, ct, percent);
+		SkyWarsReloaded.getChestManager().addItems(items, ct, percent);
 		String meth = "INVENTORY";
 		if (method.equalsIgnoreCase("hand")) {
 			meth = "HAND";

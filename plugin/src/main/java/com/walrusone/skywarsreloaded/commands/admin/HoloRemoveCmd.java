@@ -17,7 +17,7 @@ public class HoloRemoveCmd extends BaseCmd {
 
 	@Override
 	public boolean run() {
-		if (SkyWarsReloaded.getCfg().hologramsEnabled()) {
+		if (SkyWarsReloaded.getConfigManager().hologramsEnabled()) {
 			boolean result = SkyWarsReloaded.getHoloManager().removeHologram(player.getLocation());
 			if (result) {
 				player.sendMessage(ChatColor.GREEN + "The closest hologram was removed");

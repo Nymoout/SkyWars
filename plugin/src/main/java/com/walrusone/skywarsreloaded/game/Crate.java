@@ -20,7 +20,7 @@ public class Crate {
 	
 	Crate(Location loc, int max) {
 		this.loc = loc.clone();
-		SkyWarsReloaded.getCM().fillCrate(inv, max);
+		SkyWarsReloaded.getChestManager().fillCrate(inv, max);
 		ent = SkyWarsReloaded.getNMS().spawnFallingBlock(loc.add(0, 40, 0), Material.SAND, false);
 		prevY = ent.getLocation().getY();
 		checkSuccess();

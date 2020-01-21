@@ -5,18 +5,18 @@ import com.walrusone.skywarsreloaded.menus.playeroptions.OptionsSelectionMenu;
 
 public class SWOptionsCmd extends BaseCmd {
 
-	public SWOptionsCmd(String t) {
-		type = t;
-		forcePlayer = true;
-		cmdName = "options";
-		alias = new String[]{"o"};
-		argLength = 1; //counting cmdName
-	}
+    public SWOptionsCmd(String t) {
+        type = t;
+        forcePlayer = true;
+        cmdName = "options";
+        alias = new String[]{"o"};
+        argLength = 1; //counting cmdName
+    }
 
-	@Override
-	public boolean run() {
-		new OptionsSelectionMenu(player);
-		return true;
-	}
+    @Override
+    public boolean run() {
+        new OptionsSelectionMenu(player);
+        return true;
+    }
 
 }

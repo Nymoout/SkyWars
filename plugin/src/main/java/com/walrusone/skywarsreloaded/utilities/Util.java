@@ -55,7 +55,7 @@ public class Util {
 		return rand.nextInt((max - min) + 1) + min;
 	}
 	
-	public boolean hp(String t, CommandSender sender, String s) {
+	public boolean hasPermissions(String t, CommandSender sender, String s) {
 		if (t.equalsIgnoreCase("sw")) {
 			return sender.hasPermission("sw." + s);
 		} else if (t.equalsIgnoreCase("kit")) {
@@ -82,7 +82,7 @@ public class Util {
 	}
 	
 	public void playSound(Player player, Location location, String sound, float volume, float pitch) {
-		if (SkyWarsReloaded.getCfg().soundsEnabled()) {
+		if (SkyWarsReloaded.getConfigManager().soundsEnabled()) {
 			try {
 				if (player != null) {
 					player.playSound(location, Sound.valueOf(sound), volume, pitch);
@@ -95,15 +95,15 @@ public class Util {
 	
 	public int getMultiplier(Player player) {
 		if (player.hasPermission("sw.vip5")) {
-			return SkyWarsReloaded.getCfg().getVip5();
+			return SkyWarsReloaded.getConfigManager().getVip5();
 		} else if (player.hasPermission("sw.vip4")) {
-			return SkyWarsReloaded.getCfg().getVip4();
+			return SkyWarsReloaded.getConfigManager().getVip4();
 		} else if (player.hasPermission("sw.vip3")) {
-			return SkyWarsReloaded.getCfg().getVip3();
+			return SkyWarsReloaded.getConfigManager().getVip3();
 		} else if (player.hasPermission("sw.vip2")) {
-			return SkyWarsReloaded.getCfg().getVip2();
+			return SkyWarsReloaded.getConfigManager().getVip2();
 		} else if (player.hasPermission("sw.vip1")) {
-			return SkyWarsReloaded.getCfg().getVip1();
+			return SkyWarsReloaded.getConfigManager().getVip1();
 		} else {
 			return 1;
 		}
@@ -181,7 +181,7 @@ public class Util {
     	}
     	
     	boolean allowed = false;
-    	for (String world: SkyWarsReloaded.getCfg().getLobbyWorlds()) {
+    	for (String world: SkyWarsReloaded.getConfigManager().getLobbyWorlds()) {
     		if (world.equalsIgnoreCase(player.getWorld().getName())) {
     			allowed = true;
     		}
@@ -496,7 +496,7 @@ public class Util {
 	}
 	
 	public int getPlayerLevel(Player player) {
-	    if (SkyWarsReloaded.getCfg().displayPlayerExeperience()) {
+	    if (SkyWarsReloaded.getConfigManager().displayPlayerExeperience()) {
 	    	return player.getLevel();
 	    } else {
 	    	PlayerStat ps = PlayerStat.getPlayerStats(player);
@@ -536,7 +536,7 @@ public class Util {
 	}
 
 	public boolean isSpawnWorld(World world) {
-        return SkyWarsReloaded.getCfg().getSpawn() != null && world.equals(SkyWarsReloaded.getCfg().getSpawn().getWorld());
+        return SkyWarsReloaded.getConfigManager().getSpawn() != null && world.equals(SkyWarsReloaded.getConfigManager().getSpawn().getWorld());
     }
 
 	public CoordLoc getCoordLocFromString(String location) {

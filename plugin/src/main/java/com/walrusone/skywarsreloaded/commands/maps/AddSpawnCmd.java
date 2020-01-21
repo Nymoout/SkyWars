@@ -22,7 +22,7 @@ public class AddSpawnCmd extends BaseCmd {
 
 	@Override
 	public boolean run() {
-		if (SkyWarsReloaded.getCfg().getSpawn() != null) {
+		if (SkyWarsReloaded.getConfigManager().getSpawn() != null) {
 			final String type = args[1];
 			GameMap gMap = GameMap.getMap(player.getLocation().getWorld().getName());
 			if (gMap == null || !gMap.isEditing()) {

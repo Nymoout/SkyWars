@@ -17,6 +17,7 @@ import com.walrusone.skywarsreloaded.managers.PlayerStat;
 import com.walrusone.skywarsreloaded.utilities.Messaging;
 
 public class GlassColorOption extends PlayerOption {
+
 	private static ArrayList<PlayerOption> playerOptions = new ArrayList<>();
 	
     private GlassColorOption(String color, String name, ItemStack item, int level, int cost, int position, int page, int menuSize) {
@@ -126,7 +127,7 @@ public class GlassColorOption extends PlayerOption {
 
 	@Override
 	public String getUseMessage() {
-		return new Messaging.MessageFormatter().setVariable("color", name).format("menu.usecolor-playermsg");
+		return new Messaging.MessageFormatter().setVariable("deatheffect", name).format("menu.usecolor-playermsg");
 	}
 	
 	@Override
@@ -155,5 +156,4 @@ public class GlassColorOption extends PlayerOption {
     static ArrayList<PlayerOption> getPlayerOptions() {
     	return playerOptions;
     }
-
 }

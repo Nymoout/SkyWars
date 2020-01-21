@@ -26,9 +26,9 @@ public class ArenasMenu {
     	invs.add(menu);
     	
     	Runnable update = () -> {
-            if ((SkyWarsReloaded.getIC().hasViewers("arenasmenu"))) {
+            if ((SkyWarsReloaded.getIconMenuController().hasViewers("arenasmenu"))) {
                 ArrayList<GameMap> maps = GameMap.getSortedArenas();
-                ArrayList<Inventory> invs1 = SkyWarsReloaded.getIC().getMenu("arenasmenu").getInventories();
+                ArrayList<Inventory> invs1 = SkyWarsReloaded.getIconMenuController().getMenu("arenasmenu").getInventories();
 
                 for (Inventory inv: invs1) {
                     for (int i = 0; i < menuSize; i++) {
@@ -67,10 +67,10 @@ public class ArenasMenu {
             }
         };
   
-        SkyWarsReloaded.getIC().create("arenasmenu", invs, event -> {
+        SkyWarsReloaded.getIconMenuController().create("arenasmenu", invs, event -> {
 			Player player = event.getPlayer();
 			String name = event.getName();
-			if (name.equalsIgnoreCase(SkyWarsReloaded.getNMS().getItemName(SkyWarsReloaded.getIM().getItem("exitMenuItem")))) {
+			if (name.equalsIgnoreCase(SkyWarsReloaded.getNMS().getItemName(SkyWarsReloaded.getItemsManager().getItem("exitMenuItem")))) {
 				player.closeInventory();
 				return;
 			}
@@ -91,13 +91,13 @@ public class ArenasMenu {
         });
         
         
-        SkyWarsReloaded.getIC().getMenu("arenasmenu").setUpdate(update);
+        SkyWarsReloaded.getIconMenuController().getMenu("arenasmenu").setUpdate(update);
     }
 
     private void attemptUpdate(String name, Player player) {
         GameMap gMap = GameMap.getMap(name);
         if (gMap != null) {
-            SkyWarsReloaded.getIC().show(player, gMap.getArenaKey());
+            SkyWarsReloaded.getIconMenuController().show(player, gMap.getArenaKey());
             new BukkitRunnable() {
                 @Override
                 public void run() {

@@ -69,7 +69,7 @@ public class GameBoard {
         ScoreboardManager manager = SkyWarsReloaded.get().getServer().getScoreboardManager();
         scoreboard = manager.getNewScoreboard();
         objective = SkyWarsReloaded.getNMS().getNewObjective(scoreboard, "dummy", "info");
-        if (SkyWarsReloaded.getCfg().showHealth()) {
+        if (SkyWarsReloaded.getConfigManager().showHealth()) {
             Objective objective2 = SkyWarsReloaded.getNMS().getNewObjective(scoreboard, "health", ChatColor.DARK_RED + "❤");
             objective2.setDisplaySlot(DisplaySlot.BELOW_NAME);
         }
@@ -130,7 +130,7 @@ public class GameBoard {
                             scoreboard.getTeam("line" + i).removeEntry(currentLineText.get(i));
                         }
                         scoreboard.getTeam("line" + i).addEntry(s.toString());
-                        objective.getScore(s.toString()).setScore(17-i);
+                        objective.getScore(s.toString()).setScore(17 - i);
                         currentLineText.put(i, s.toString());
                     }
                 }
@@ -174,7 +174,7 @@ public class GameBoard {
                     scoreboard.getTeam("line" + position).removeEntry(currentLineText.get(position));
                 }
                 scoreboard.getTeam("line" + position).addEntry(newLine);
-                objective.getScore(newLine).setScore(17-position);
+                objective.getScore(newLine).setScore(17 - position);
                 currentLineText.put(position, newLine);
             }
         }
@@ -182,7 +182,7 @@ public class GameBoard {
 
 
     private void startRestartTimer() {
-        restartTimer = SkyWarsReloaded.getCfg().getTimeAfterMatch();
+        restartTimer = SkyWarsReloaded.getConfigManager().getTimeAfterMatch();
         if (SkyWarsReloaded.get().isEnabled()) {
             new BukkitRunnable() {
                 @Override
@@ -203,15 +203,15 @@ public class GameBoard {
                 .setVariable("time", "" + Util.get().getFormattedTime(gMap.getTimer()))
                 .setVariable("players", "" + gMap.getAlivePlayers().size())
                 .setVariable("maxplayers", "" + gMap.getTeamCards().size() * gMap.getTeamSize())
-                .setVariable("winner", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(0) : getWinningTeamName())
-                .setVariable("winner1", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(0) : getWinningTeamName())
-                .setVariable("winner2", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(1) : "")
-                .setVariable("winner3", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(2) : "")
-                .setVariable("winner4", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(3) : "")
-                .setVariable("winner5", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(4) : "")
-                .setVariable("winner6", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(5) : "")
-                .setVariable("winner7", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(6) : "")
-                .setVariable("winner8", SkyWarsReloaded.getCfg().usePlayerNames() ? getWinnerName(7) : "")
+                .setVariable("winner", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(0) : getWinningTeamName())
+                .setVariable("winner1", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(0) : getWinningTeamName())
+                .setVariable("winner2", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(1) : "")
+                .setVariable("winner3", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(2) : "")
+                .setVariable("winner4", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(3) : "")
+                .setVariable("winner5", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(4) : "")
+                .setVariable("winner6", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(5) : "")
+                .setVariable("winner7", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(6) : "")
+                .setVariable("winner8", SkyWarsReloaded.getConfigManager().usePlayerNames() ? getWinnerName(7) : "")
                 .setVariable("restarttime", "" + restartTimer)
                 .setVariable("chestvote", ChatColor.stripColor(gMap.getCurrentChest()))
                 .setVariable("timevote", ChatColor.stripColor(gMap.getCurrentTime()))
@@ -236,7 +236,7 @@ public class GameBoard {
     }
 
     private void resetScoreboard() {
-        for (Team team: scoreboard.getTeams()) {
+        for (Team team : scoreboard.getTeams()) {
             team.unregister();
         }
         if (objective != null) {

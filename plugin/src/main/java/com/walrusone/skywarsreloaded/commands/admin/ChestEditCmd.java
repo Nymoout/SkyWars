@@ -53,7 +53,7 @@ public class ChestEditCmd extends BaseCmd {
 			return false;
 		}
 
-		SkyWarsReloaded.getCM().editChest(ct, percent, player);
+		SkyWarsReloaded.getChestManager().editChest(ct, percent, player);
 
 		return true;
 	}

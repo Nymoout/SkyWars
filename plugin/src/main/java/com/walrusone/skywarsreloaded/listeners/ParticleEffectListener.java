@@ -36,7 +36,7 @@ public class ParticleEffectListener implements Listener{
                             List<ParticleEffect> effects = peo.getEffects();
                             if (key != null && effects != null) {
                                 if (!key.equalsIgnoreCase("none")) {
-                                    SkyWarsReloaded.getOM().addProjectile(projectile, effects);
+                                    SkyWarsReloaded.getPlayerOptionsManager().addProjectile(projectile, effects);
                                 }
                             }
                         }

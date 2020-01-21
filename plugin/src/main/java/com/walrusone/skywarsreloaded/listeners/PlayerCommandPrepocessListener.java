@@ -23,11 +23,11 @@ public class PlayerCommandPrepocessListener implements Listener
             	MatchManager.get().removeSpectator(e.getPlayer());
             	return;
     		}
-        	if (SkyWarsReloaded.getCfg().disableCommandsSpectate()) {
+        	if (SkyWarsReloaded.getConfigManager().disableCommandsSpectate()) {
 				if (e.getPlayer().hasPermission("sw.allowcommands")) {
 					return;
 				}
-				for (final String a1 : SkyWarsReloaded.getCfg().getEnabledCommandsSpectate()) {
+				for (final String a1 : SkyWarsReloaded.getConfigManager().getEnabledCommandsSpectate()) {
 					if (splited.length == 1) {
 						if (splited[0].equalsIgnoreCase("/" + a1)) {
 							return;
@@ -48,7 +48,7 @@ public class PlayerCommandPrepocessListener implements Listener
         	if (e.getPlayer().hasPermission("sw.allowcommands")) {
         		return;
         	}
-            for (final String a1 : SkyWarsReloaded.getCfg().getEnabledCommands()) {
+            for (final String a1 : SkyWarsReloaded.getConfigManager().getEnabledCommands()) {
             	if (splited.length == 1) {
                 	if (splited[0].equalsIgnoreCase("/" + a1)) {
                         return;

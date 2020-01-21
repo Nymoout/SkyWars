@@ -7,6 +7,7 @@ import com.walrusone.skywarsreloaded.managers.PlayerStat;
 import javax.annotation.Nonnull;
 
 public abstract class PlayerOption implements Comparable<PlayerOption> {
+
 		protected ItemStack item;
 		protected int level;
 		protected int cost;

@@ -5,12 +5,7 @@ import com.walrusone.skywarsreloaded.SkyWarsReloaded;
 import com.walrusone.skywarsreloaded.enums.GameType;
 import com.walrusone.skywarsreloaded.game.Crate;
 import com.walrusone.skywarsreloaded.game.GameMap;
-import com.walrusone.skywarsreloaded.menus.playeroptions.GlassColorOption;
-import com.walrusone.skywarsreloaded.menus.playeroptions.KillSoundOption;
-import com.walrusone.skywarsreloaded.menus.playeroptions.ParticleEffectOption;
-import com.walrusone.skywarsreloaded.menus.playeroptions.ProjectileEffectOption;
-import com.walrusone.skywarsreloaded.menus.playeroptions.TauntOption;
-import com.walrusone.skywarsreloaded.menus.playeroptions.WinSoundOption;
+import com.walrusone.skywarsreloaded.menus.playeroptions.*;
 import com.walrusone.skywarsreloaded.menus.playeroptions.objects.ParticleEffect;
 import com.walrusone.skywarsreloaded.utilities.Util;
 
@@ -33,7 +28,7 @@ public class PlayerOptionsManager {
 	private final List<ParticleEffect> crateEffects = new ArrayList<>();
 
     public PlayerOptionsManager() {
-    	if (SkyWarsReloaded.getCfg().particlesEnabled()) {
+    	if (SkyWarsReloaded.getConfigManager().particlesEnabled()) {
     		crateEffects.add(new ParticleEffect("CRIT", 0, 2, 0, 8, 4));
     		crateEffects.add(new ParticleEffect("CRIT_MAGIC", 0, 2, 0, 8, 4));
             SkyWarsReloaded.get().getServer().getScheduler().scheduleSyncRepeatingTask(SkyWarsReloaded.get(), () -> {
@@ -60,7 +55,7 @@ public class PlayerOptionsManager {
                         doEffects(crate.getEntity().getLocation(), crateEffects, false);
                     }
                 }
-            }, SkyWarsReloaded.getCfg().getTicksPerUpdate(), SkyWarsReloaded.getCfg().getTicksPerUpdate());
+            }, SkyWarsReloaded.getConfigManager().getTicksPerUpdate(), SkyWarsReloaded.getConfigManager().getTicksPerUpdate());
     	}
     	GlassColorOption.loadPlayerOptions();
     	ParticleEffectOption.loadPlayerOptions();

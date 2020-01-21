@@ -56,10 +56,10 @@ class EventsMenu {
         ArrayList<Inventory> invs = new ArrayList<>();
         invs.add(inv);
 
-        SkyWarsReloaded.getIC().create(player, invs, event -> {
+        SkyWarsReloaded.getIconMenuController().create(player, invs, event -> {
 			String name = event.getName();
-			if (name.equalsIgnoreCase(SkyWarsReloaded.getNMS().getItemName(SkyWarsReloaded.getIM().getItem("exitMenuItem")))) {
-				SkyWarsReloaded.getIC().show(player, gMap.getArenaKey());
+			if (name.equalsIgnoreCase(SkyWarsReloaded.getNMS().getItemName(SkyWarsReloaded.getItemsManager().getItem("exitMenuItem")))) {
+				SkyWarsReloaded.getIconMenuController().show(player, gMap.getArenaKey());
 				new BukkitRunnable() {
 					@Override
 					public void run() {
@@ -92,7 +92,7 @@ class EventsMenu {
 		});
                 
         if (player != null) {
-            SkyWarsReloaded.getIC().show(player, null);
+            SkyWarsReloaded.getIconMenuController().show(player, null);
         }
     }
 }

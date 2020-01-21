@@ -145,9 +145,7 @@ public class TauntOption extends PlayerOption{
 	public void performTaunt(Player player) {
 		if (!this.getKey().equalsIgnoreCase("none")) {
 			SkyWarsReloaded.getNMS().playGameSound(player.getLocation(), sound, volume, pitch, useCustomSound);
-			
 			doTauntParticles(player.getUniqueId().toString());
-		
 			if (this.getMessage() != null && this.getMessage().length() != 0) {
 				String prefix = new Messaging.MessageFormatter().setVariable("player", player.getDisplayName()).format("taunt.prefix");
 				List<Player> players = player.getWorld().getPlayers();
@@ -161,7 +159,7 @@ public class TauntOption extends PlayerOption{
 	}
 	
 	/**Creates a sphere of particles around the player
-	 */
+	 **/
     private void doTauntParticles(String uuid) {
     	Player player = SkyWarsReloaded.get().getServer().getPlayer(UUID.fromString(uuid));
     	if (player != null) {

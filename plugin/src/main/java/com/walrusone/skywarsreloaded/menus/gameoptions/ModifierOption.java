@@ -65,7 +65,7 @@ public class ModifierOption extends GameOption {
 		if (vote != null) {
 			setVote(player, vote);
 			updateVotes();
-			Util.get().playSound(player, player.getLocation(), SkyWarsReloaded.getCfg().getConfirmeSelctionSound(), 1, 1);
+			Util.get().playSound(player, player.getLocation(), SkyWarsReloaded.getConfigManager().getConfirmeSelctionSound(), 1, 1);
 			if (gameMap.getMatchState().equals(MatchState.WAITINGSTART)) {
 				new VotingMenu(player);
 			}
@@ -106,15 +106,15 @@ public class ModifierOption extends GameOption {
 		Vote modifier = gameMap.getModifierOption().getVoted();
 		if (modifier == Vote.MODIFIERSPEED) {
 	    	for (Player player: gameMap.getAlivePlayers()) {
-	    		player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, SkyWarsReloaded.getCfg().getSpeed(), true, false));
+	    		player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, SkyWarsReloaded.getConfigManager().getSpeed(), true, false));
 	    	}
 		} else if (modifier ==  Vote.MODIFIERJUMP) {
 	    	for (Player player: gameMap.getAlivePlayers()) {
-	    		player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, SkyWarsReloaded.getCfg().getJump(), true, false));
+	    		player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, SkyWarsReloaded.getConfigManager().getJump(), true, false));
 	    	}
 		} else if (modifier ==  Vote.MODIFIERSTRENGTH) {
 	    	for (Player player: gameMap.getAlivePlayers()) {
-	    		player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, SkyWarsReloaded.getCfg().getStrength(), true, false));
+	    		player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, SkyWarsReloaded.getConfigManager().getStrength(), true, false));
 	    	}
 		} 
 	}

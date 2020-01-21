@@ -38,6 +38,7 @@ public class PlayerStat
     private String particleEffect;
     private String projectileEffect;
     private String glassColor;
+	private String deathEffect;
     private String killSound;
     private String winSound;
     private String taunt;
@@ -50,11 +51,11 @@ public class PlayerStat
         this.playername = player.getName();
         this.perms = player.addAttachment(SkyWarsReloaded.get());
         DataStorage.get().loadStats(this);
-        if (SkyWarsReloaded.getCfg().economyEnabled()) {
+        if (SkyWarsReloaded.getConfigManager().economyEnabled()) {
             DataStorage.get().loadperms(this);
         }
-		if (SkyWarsReloaded.getCfg().getSpawn() != null) {
-			if (player.getWorld().equals(SkyWarsReloaded.getCfg().getSpawn().getWorld())) {
+		if (SkyWarsReloaded.getConfigManager().getSpawn() != null) {
+			if (player.getWorld().equals(SkyWarsReloaded.getConfigManager().getSpawn().getWorld())) {
 				updatePlayer(uuid);
 			}
 		}
@@ -71,12 +72,12 @@ public class PlayerStat
             		new BukkitRunnable() {
 						@Override
 						public void run() {
-		            		if (SkyWarsReloaded.getCfg().bungeeMode()) {
+		            		if (SkyWarsReloaded.getConfigManager().bungeeMode()) {
 		                		Player player = SkyWarsReloaded.get().getServer().getPlayer(UUID.fromString(uuid));
 		                		if (player != null) {
 		                			boolean joined = MatchManager.get().joinGame(player, GameType.ALL);
 		                			if (!joined) {
-		                    			SkyWarsReloaded.get().sendBungeeMsg(player, "Connect", SkyWarsReloaded.getCfg().getBungeeLobby());
+		                    			SkyWarsReloaded.get().sendBungeeMsg(player, "Connect", SkyWarsReloaded.getConfigManager().getBungeeLobby());
 		                    		}
 		                		}
 							}
@@ -104,7 +105,7 @@ public class PlayerStat
 							@Override
 							public void run() {
 								if (Util.get().isSpawnWorld(player.getWorld())) {
-									if(SkyWarsReloaded.getCfg().protectLobby()) {
+									if(SkyWarsReloaded.getConfigManager().protectLobby()) {
 										player.setGameMode(GameMode.ADVENTURE);
 										player.setHealth(20);
 										player.setFoodLevel(20);
@@ -114,21 +115,21 @@ public class PlayerStat
 										player.resetPlayerWeather();
 									}
 									PlayerStat pStats = PlayerStat.getPlayerStats(player);
-									if (pStats != null && SkyWarsReloaded.getCfg().displayPlayerExeperience()) {
+									if (pStats != null && SkyWarsReloaded.getConfigManager().displayPlayerExeperience()) {
 										Util.get().setPlayerExperience(player, pStats.getXp());
 									}
-									if (SkyWarsReloaded.get().isEnabled() && SkyWarsReloaded.getCfg().lobbyBoardEnabled()) {
+									if (SkyWarsReloaded.get().isEnabled() && SkyWarsReloaded.getConfigManager().lobbyBoardEnabled()) {
 										getScoreboard(player);
 										player.setScoreboard(getPlayerScoreboard(player));
 									}
-									if (SkyWarsReloaded.getCfg().optionsMenuEnabled()) {
-										player.getInventory().setItem(SkyWarsReloaded.getCfg().getOptionsSlot(), SkyWarsReloaded.getIM().getItem("optionselect"));
+									if (SkyWarsReloaded.getConfigManager().optionsMenuEnabled()) {
+										player.getInventory().setItem(SkyWarsReloaded.getConfigManager().getOptionsSlot(), SkyWarsReloaded.getItemsManager().getItem("optionselect"));
 									}
-									if (SkyWarsReloaded.getCfg().joinMenuEnabled() && player.hasPermission("sw.join")) {
-										player.getInventory().setItem(SkyWarsReloaded.getCfg().getJoinSlot(), SkyWarsReloaded.getIM().getItem("joinselect"));
+									if (SkyWarsReloaded.getConfigManager().joinMenuEnabled() && player.hasPermission("sw.join")) {
+										player.getInventory().setItem(SkyWarsReloaded.getConfigManager().getJoinSlot(), SkyWarsReloaded.getItemsManager().getItem("joinselect"));
 									}
-									if (SkyWarsReloaded.getCfg().spectateMenuEnabled() && player.hasPermission("sw.spectate")) {
-										player.getInventory().setItem(SkyWarsReloaded.getCfg().getSpectateSlot(), SkyWarsReloaded.getIM().getItem("spectateselect"));
+									if (SkyWarsReloaded.getConfigManager().spectateMenuEnabled() && player.hasPermission("sw.spectate")) {
+										player.getInventory().setItem(SkyWarsReloaded.getConfigManager().getSpectateSlot(), SkyWarsReloaded.getItemsManager().getItem("spectateselect"));
 									}
 									player.updateInventory();
 								}
@@ -275,6 +276,14 @@ public class PlayerStat
 	public String getGlassColor() {
 		return this.glassColor;
 	}
+
+	public void setDeathEffect(String dEffect) {
+		this.deathEffect = dEffect;
+	}
+
+	public String getDeathEffect() {
+		return deathEffect;
+	}
 	
 	public void setKillSound(String glassC) {
 		this.killSound = glassC;
@@ -385,7 +394,7 @@ public class PlayerStat
 	}
 	
 	private static double getBalance(Player player) {
-		if (SkyWarsReloaded.getCfg().economyEnabled()) {
+		if (SkyWarsReloaded.getConfigManager().economyEnabled()) {
 			return VaultUtils.get().getBalance(player);
 		}
 		return 0;

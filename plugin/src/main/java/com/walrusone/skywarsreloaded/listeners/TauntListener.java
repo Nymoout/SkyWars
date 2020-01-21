@@ -32,8 +32,8 @@ public class TauntListener implements Listener {
 			if (lastHandSwap.containsKey(uuid)) {
 				if (System.currentTimeMillis() - lastHandSwap.get(uuid) < 500) {
 					if (lastTaunt.containsKey(uuid)) {
-						if (System.currentTimeMillis() - lastTaunt.get(uuid) < SkyWarsReloaded.getCfg().getCooldown()*1000) {
-							int cooldown = (int) ((SkyWarsReloaded.getCfg().getCooldown()*1000 - (System.currentTimeMillis() - lastTaunt.get(uuid)))/1000);
+						if (System.currentTimeMillis() - lastTaunt.get(uuid) < SkyWarsReloaded.getConfigManager().getCooldown()*1000) {
+							int cooldown = (int) ((SkyWarsReloaded.getConfigManager().getCooldown()*1000 - (System.currentTimeMillis() - lastTaunt.get(uuid)))/1000);
 							int seconds = (cooldown % 60) + 1;
 							int minutes = (cooldown-(seconds - 1)) / 60;
 							String cooldownText = "";

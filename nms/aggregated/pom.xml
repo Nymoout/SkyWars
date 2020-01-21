@@ -12,7 +12,6 @@
 
     <artifactId>skywarsreloaded-nms-aggregated</artifactId>
 	<packaging>pom</packaging>
-
     <name>SkyWarsReloaded NMS Aggregated</name>
 
     <dependencies>

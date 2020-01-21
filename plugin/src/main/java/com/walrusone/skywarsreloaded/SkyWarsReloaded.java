@@ -157,7 +157,7 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
         this.getServer().getPluginManager().registerEvents(new SpectateListener(), this);
         this.getServer().getPluginManager().registerEvents(new ChatListener(), this);
 		this.getServer().getPluginManager().registerEvents(new ProjectileSpleefListener(), this);
-		if (SkyWarsReloaded.getCfg().hologramsEnabled()) {
+		if (SkyWarsReloaded.getConfigManager().hologramsEnabled()) {
 			hu = null;
         	if (Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
         		hu = new HoloDisUtil();
@@ -170,22 +170,22 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
 		}
         
         load();
-        if (SkyWarsReloaded.getCfg().tauntsEnabled()) {
+        if (SkyWarsReloaded.getConfigManager().tauntsEnabled()) {
             this.getServer().getPluginManager().registerEvents(new TauntListener(), this);
         }
-        if (SkyWarsReloaded.getCfg().particlesEnabled()) {
+        if (SkyWarsReloaded.getConfigManager().particlesEnabled()) {
         	this.getServer().getPluginManager().registerEvents(new ParticleEffectListener(), this);
         }
         if (config.disableCommands()) {
             this.getServer().getPluginManager().registerEvents(new PlayerCommandPrepocessListener(), this);
         }
         
-    	if (getCfg().bungeeMode()) {
+    	if (getConfigManager().bungeeMode()) {
         	this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         	this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
     		Bukkit.getPluginManager().registerEvents(new PingListener(), this);
     	}
-        if (getCfg().bungeeMode()) {
+        if (getConfigManager().bungeeMode()) {
             new BukkitRunnable() {
                 public void run() {
                 	if (servername.equalsIgnoreCase("none")) {
@@ -219,7 +219,7 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
                     MatchManager.get().playerLeave(player, DamageCause.CUSTOM, true, false, true);
             	}
             }
-            getWM().deleteWorld(gameMap.getName());
+            getWorldManager().deleteWorld(gameMap.getName());
         }
         for (final PlayerData playerData : PlayerData.getPlayerData()) {
             playerData.restore(false);
@@ -248,7 +248,7 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
         useable.clear();
         
         for (LeaderType type: LeaderType.values()) {
-			if (SkyWarsReloaded.getCfg().isTypeEnabled(type)) {
+			if (SkyWarsReloaded.getConfigManager().isTypeEnabled(type)) {
 				useable.add(type.toString());
 			}
         }
@@ -265,22 +265,22 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
             }
         }.runTaskAsynchronously(this);
         
-        if (SkyWarsReloaded.getCfg().economyEnabled()) {
+        if (SkyWarsReloaded.getConfigManager().economyEnabled()) {
     		if (Bukkit.getServer().getPluginManager().getPlugin("Vault") == null) {
-    			SkyWarsReloaded.getCfg().setEconomyEnabled(false);
+    			SkyWarsReloaded.getConfigManager().setEconomyEnabled(false);
             }
             RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
             if (rsp == null) {
-                SkyWarsReloaded.getCfg().setEconomyEnabled(false);
+                SkyWarsReloaded.getConfigManager().setEconomyEnabled(false);
             }
         }
 
-        if (SkyWarsReloaded.getCfg().joinMenuEnabled() || SkyWarsReloaded.getCfg().spectateMenuEnabled()) {
+        if (SkyWarsReloaded.getConfigManager().joinMenuEnabled() || SkyWarsReloaded.getConfigManager().spectateMenuEnabled()) {
         	new JoinMenu();
 	        new JoinSingleMenu();
 			new JoinTeamMenu();
         }
-        if (SkyWarsReloaded.getCfg().spectateMenuEnabled()) {
+        if (SkyWarsReloaded.getConfigManager().spectateMenuEnabled()) {
         	new SpectateMenu();
 	        new SpectateSingleMenu();
             new SpectateTeamMenu();
@@ -292,7 +292,7 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
         if (config.partyEnabled()) {
             getCommand("swparty").setExecutor(new PartyCmdManager());
         }
-        if (getCfg().borderEnabled()) {
+        if (getConfigManager().borderEnabled()) {
         	if (specObserver != null) {
 				specObserver.cancel();
 			}
@@ -320,19 +320,19 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
 	     return instance.leaderboard;
 	}
 	
-    public static Config getCfg() {
+    public static Config getConfigManager() {
     	return instance.config;
     }
     
-    public static IconMenuController getIC() {
+    public static IconMenuController getIconMenuController() {
     	return instance.ic;
     }
     
-    public static WorldManager getWM() {
+    public static WorldManager getWorldManager() {
     	return instance.wm;
     }
     
-    public static Database getDb() {
+    public static Database getDatabase() {
     	return db;
     }
            
@@ -349,11 +349,11 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
 		}
     }
 
-	public static ChestManager getCM() {
+	public static ChestManager getChestManager() {
 		return instance.cm;
 	}
 	
-	public static ItemsManager getIM() {
+	public static ItemsManager getItemsManager() {
 		return instance.im;
 	}
 
@@ -449,7 +449,7 @@ public class SkyWarsReloaded extends JavaPlugin implements PluginMessageListener
 		return instance.hu;
 	}
 	
-	public static PlayerOptionsManager getOM() {
+	public static PlayerOptionsManager getPlayerOptionsManager() {
 		return instance.pom;
 	}
     

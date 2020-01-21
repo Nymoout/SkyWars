@@ -19,8 +19,8 @@ public class SetSpawnCmd extends BaseCmd {
 	@Override
 	public boolean run() {
 	    Location spawn = player.getLocation();
-	    SkyWarsReloaded.getCfg().setSpawn(spawn);
-	    SkyWarsReloaded.getCfg().save();
+	    SkyWarsReloaded.getConfigManager().setSpawn(spawn);
+	    SkyWarsReloaded.getConfigManager().save();
 	    player.sendMessage(new Messaging.MessageFormatter().format("command.spawnset"));
 		return true;
 	}

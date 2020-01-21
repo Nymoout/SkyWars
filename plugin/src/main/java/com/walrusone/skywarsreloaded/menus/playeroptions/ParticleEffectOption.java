@@ -35,6 +35,7 @@ public class ParticleEffectOption extends PlayerOption {
         this.page = page;
         this.menuSize = menuSize;
     }
+
     public static void loadPlayerOptions() {
     	 playerOptions.clear();
     	 File particleFile = new File(SkyWarsReloaded.get().getDataFolder(), "particleeffects.yml");
@@ -131,14 +132,17 @@ public class ParticleEffectOption extends PlayerOption {
 	public String getUseMessage() {
 		return new Messaging.MessageFormatter().setVariable("effect", name).format("menu.useeffect-playermsg");
 	}
+
 	@Override
 	public void setEffect(PlayerStat stat) {
 		stat.setParticleEffect(key);	
 	}
+
 	@Override
 	public String getUseLore() {
 		return "menu.useeffect-seteffect";
 	}
+
 	
 	static PlayerOption getPlayerOptionByName(String name) {
     	for (PlayerOption pOption: playerOptions) {

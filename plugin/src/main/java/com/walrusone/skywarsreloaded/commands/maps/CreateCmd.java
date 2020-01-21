@@ -26,7 +26,7 @@ public class CreateCmd extends BaseCmd {
 
 	@Override
 	public boolean run() {
-		if (SkyWarsReloaded.getCfg().getSpawn() != null) {
+		if (SkyWarsReloaded.getConfigManager().getSpawn() != null) {
 			String worldName = args[1];
 			World.Environment environment = World.Environment.NORMAL;
 			if (args.length > 2) {

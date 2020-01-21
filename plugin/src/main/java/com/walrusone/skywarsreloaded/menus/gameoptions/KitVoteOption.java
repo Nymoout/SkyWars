@@ -37,7 +37,7 @@ public class KitVoteOption {
 	
 	private void createMenu(String key, String name) {
 		this.key = key;
-		int menuSize = SkyWarsReloaded.getCfg().getKitMenuSize();
+		int menuSize = SkyWarsReloaded.getConfigManager().getKitMenuSize();
 		ArrayList<Inventory> invs = new ArrayList<>();
 		for (GameKit gameKit: GameKit.getAvailableKits()) {
         	int page = gameKit.getPage() - 1;
@@ -48,9 +48,9 @@ public class KitVoteOption {
             }
 		}
 		
-		SkyWarsReloaded.getIC().create(key, invs, event -> {
+		SkyWarsReloaded.getIconMenuController().create(key, invs, event -> {
             String itemName = event.getName();
-            if (itemName.equalsIgnoreCase(SkyWarsReloaded.getNMS().getItemName(SkyWarsReloaded.getIM().getItem("exitMenuItem")))) {
+            if (itemName.equalsIgnoreCase(SkyWarsReloaded.getNMS().getItemName(SkyWarsReloaded.getItemsManager().getItem("exitMenuItem")))) {
                 event.getPlayer().closeInventory();
                 return;
             }
@@ -65,14 +65,14 @@ public class KitVoteOption {
                 }
                 gameMap.setKitVote(event.getPlayer(), kit);
                 updateKitVotes();
-                Util.get().playSound(event.getPlayer(), event.getPlayer().getLocation(), SkyWarsReloaded.getCfg().getConfirmeSelctionSound(), 1, 1);
+                Util.get().playSound(event.getPlayer(), event.getPlayer().getLocation(), SkyWarsReloaded.getConfigManager().getConfirmeSelctionSound(), 1, 1);
                 event.getPlayer().closeInventory();
                 MatchManager.get().message(gameMap, new Messaging.MessageFormatter()
                         .setVariable("player", event.getPlayer().getName())
                         .setVariable("kit", kit.getColorName()).format("game.votekit"));
             }
         });
-        iconMenu = SkyWarsReloaded.getIC().getMenu(key);
+        iconMenu = SkyWarsReloaded.getIconMenuController().getMenu(key);
         for (GameKit gameKit: GameKit.getAvailableKits()) {
             loadKit(null, null, gameKit);
         }

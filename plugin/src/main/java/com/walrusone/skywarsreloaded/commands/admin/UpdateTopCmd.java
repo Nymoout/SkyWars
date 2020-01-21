@@ -18,8 +18,8 @@ public class UpdateTopCmd extends BaseCmd {
 	@Override
 	public boolean run() {
 		for (LeaderType type: LeaderType.values()) {
-			if (SkyWarsReloaded.getCfg().isTypeEnabled(type)) {
-				DataStorage.get().updateTop(type, SkyWarsReloaded.getCfg().getLeaderSize());
+			if (SkyWarsReloaded.getConfigManager().isTypeEnabled(type)) {
+				DataStorage.get().updateTop(type, SkyWarsReloaded.getConfigManager().getLeaderSize());
 			}
 		}
 		return true;

@@ -19,7 +19,7 @@ import com.walrusone.skywarsreloaded.utilities.Util;
 
 public class KitSelectionMenu {
 
-    private static int menuSize = SkyWarsReloaded.getCfg().getKitMenuSize();
+    private static int menuSize = SkyWarsReloaded.getConfigManager().getKitMenuSize();
     private static final String menuName = new Messaging.MessageFormatter().format("menu.kit-section-menu");
     
     public KitSelectionMenu(final Player player) {
@@ -53,9 +53,9 @@ public class KitSelectionMenu {
                 invs.get(page).setItem(pos, SkyWarsReloaded.getNMS().getItemStack(item, loreList, ChatColor.translateAlternateColorCodes('&', kit.getName())));
             }
             if (gMap != null) {
-            	SkyWarsReloaded.getIC().create(player, invs, event -> {
+            	SkyWarsReloaded.getIconMenuController().create(player, invs, event -> {
                     String name = event.getName();
-                    if (name.equalsIgnoreCase(SkyWarsReloaded.getNMS().getItemName(SkyWarsReloaded.getIM().getItem("exitMenuItem")))) {
+                    if (name.equalsIgnoreCase(SkyWarsReloaded.getNMS().getItemName(SkyWarsReloaded.getItemsManager().getItem("exitMenuItem")))) {
                         player.closeInventory();
                         return;
                     }
@@ -66,19 +66,19 @@ public class KitSelectionMenu {
 
                     if (kit.needPermission()) {
                         if (!player.hasPermission("sw.kit." + kit.getFilename())) {
-                            Util.get().playSound(player, player.getLocation(), SkyWarsReloaded.getCfg().getErrorSound(), 1, 1);
+                            Util.get().playSound(player, player.getLocation(), SkyWarsReloaded.getConfigManager().getErrorSound(), 1, 1);
                             return;
                         }
                     }
 
                     player.closeInventory();
-                    Util.get().playSound(player, player.getLocation(), SkyWarsReloaded.getCfg().getConfirmeSelctionSound(), 1, 1);
+                    Util.get().playSound(player, player.getLocation(), SkyWarsReloaded.getConfigManager().getConfirmeSelctionSound(), 1, 1);
                     gMap.setKitVote(player, kit);
                     player.sendMessage(new Messaging.MessageFormatter().setVariable("kit", kit.getColorName()).format("game.select-kit"));
                 });
             }
             if (player != null) {
-                SkyWarsReloaded.getIC().show(player, null);
+                SkyWarsReloaded.getIconMenuController().show(player, null);
             }
         }
     }

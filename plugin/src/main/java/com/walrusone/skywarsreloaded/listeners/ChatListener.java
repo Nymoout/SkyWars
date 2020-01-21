@@ -47,7 +47,7 @@ public class ChatListener implements Listener {
 							gMap.update();
 						}
 					}.runTask(SkyWarsReloaded.get());
-					SkyWarsReloaded.getIC().show(player, gMap.getArenaKey());
+					SkyWarsReloaded.getIconMenuController().show(player, gMap.getArenaKey());
 				} else if (gMap != null && setting.equalsIgnoreCase("creator")) {
 					gMap.setCreator(variable);
 					player.sendMessage(new Messaging.MessageFormatter().setVariable("mapname", gMap.getName()).setVariable("creator", variable).format("maps.creator"));
@@ -57,7 +57,7 @@ public class ChatListener implements Listener {
 							gMap.update();
 						}
 					}.runTask(SkyWarsReloaded.get());
-					SkyWarsReloaded.getIC().show(player, gMap.getArenaKey());
+					SkyWarsReloaded.getIconMenuController().show(player, gMap.getArenaKey());
 				}
 				ChatListener.toChange.remove(uuid);
 			} else {
@@ -77,14 +77,14 @@ public class ChatListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onChat(AsyncPlayerChatEvent event) {
-		if (SkyWarsReloaded.getCfg().formatChat()) {
+		if (SkyWarsReloaded.getConfigManager().formatChat()) {
 			GameMap gMap = MatchManager.get().getPlayerMap(event.getPlayer());
 			GameMap sMap = MatchManager.get().getSpectatorMap(event.getPlayer());
 			if (gMap != null || sMap != null) {
-				if (SkyWarsReloaded.getCfg().useExternalChat()) {
+				if (SkyWarsReloaded.getConfigManager().useExternalChat()) {
 				    PlayerStat ps = PlayerStat.getPlayerStats(event.getPlayer());
 	    			String prefix = "";
-                    if (SkyWarsReloaded.getCfg().addPrefix() && ps != null) {
+                    if (SkyWarsReloaded.getConfigManager().addPrefix() && ps != null) {
                         prefix = new Messaging.MessageFormatter()
                                 .setVariable("elo", Integer.toString(ps.getElo()))
                                 .setVariable("wins", Integer.toString(ps.getWins()))
@@ -96,9 +96,9 @@ public class ChatListener implements Listener {
                     }
 	            	String format = event.getFormat();
 	            	ArrayList<Player> recievers = null;
-	            	if (sMap != null && SkyWarsReloaded.getCfg().limitSpecChat()) {
+	            	if (sMap != null && SkyWarsReloaded.getConfigManager().limitSpecChat()) {
 		            		recievers = sMap.getMessageAblePlayers(true);
-		            } else if (sMap != null && SkyWarsReloaded.getCfg().limitGameChat() || gMap != null && SkyWarsReloaded.getCfg().limitGameChat()) {
+		            } else if (sMap != null && SkyWarsReloaded.getConfigManager().limitGameChat() || gMap != null && SkyWarsReloaded.getConfigManager().limitGameChat()) {
 	            	    if (sMap != null) {
                             recievers = sMap.getMessageAblePlayers(false);
                         } else {
@@ -112,7 +112,7 @@ public class ChatListener implements Listener {
 	            	event.setFormat(prefix + format);
 				} else {
 					String prefix = "";
-					if (SkyWarsReloaded.getCfg().economyEnabled()) {
+					if (SkyWarsReloaded.getConfigManager().economyEnabled()) {
 						if (VaultUtils.get().getChat() != null) {
 							if (VaultUtils.get().getChat().getPlayerPrefix(event.getPlayer()) != null) {
 								prefix = VaultUtils.get().getChat().getPlayerPrefix(event.getPlayer());
@@ -164,9 +164,9 @@ public class ChatListener implements Listener {
                                     .format("chat.ingamechat");
                         }
 						ArrayList<Player> recievers = null;
-						if (sMap != null && SkyWarsReloaded.getCfg().limitSpecChat()) {
+						if (sMap != null && SkyWarsReloaded.getConfigManager().limitSpecChat()) {
 							recievers = sMap.getMessageAblePlayers(true);
-						} else if (sMap != null && SkyWarsReloaded.getCfg().limitGameChat() || gMap != null && SkyWarsReloaded.getCfg().limitGameChat()) {
+						} else if (sMap != null && SkyWarsReloaded.getConfigManager().limitGameChat() || gMap != null && SkyWarsReloaded.getConfigManager().limitGameChat()) {
 							if (sMap != null) {
 								recievers = sMap.getMessageAblePlayers(false);
 							} else {
@@ -181,11 +181,11 @@ public class ChatListener implements Listener {
                     }
 	    		}
 			} else {
-				if(SkyWarsReloaded.getCfg().getSpawn() != null && event.getPlayer().getWorld() != null && event.getPlayer().getWorld().equals(SkyWarsReloaded.getCfg().getSpawn().getWorld())) {
-					if (SkyWarsReloaded.getCfg().useExternalChat()) { 	
+				if(SkyWarsReloaded.getConfigManager().getSpawn() != null && event.getPlayer().getWorld() != null && event.getPlayer().getWorld().equals(SkyWarsReloaded.getConfigManager().getSpawn().getWorld())) {
+					if (SkyWarsReloaded.getConfigManager().useExternalChat()) {
 		    			PlayerStat ps = PlayerStat.getPlayerStats(event.getPlayer());
 		            	String prefix = "";
-		            	if (SkyWarsReloaded.getCfg().addPrefix() && ps != null) {
+		            	if (SkyWarsReloaded.getConfigManager().addPrefix() && ps != null) {
 		            		prefix = new Messaging.MessageFormatter()
     						.setVariable("elo", Integer.toString(ps.getElo()))
     						.setVariable("wins", Integer.toString(ps.getWins()))
@@ -196,14 +196,14 @@ public class ChatListener implements Listener {
     						.format("chat.externalPrefix");
 		            	}
 		            	String format = event.getFormat();
-		            	if (SkyWarsReloaded.getCfg().limitLobbyChat()) {
+		            	if (SkyWarsReloaded.getConfigManager().limitLobbyChat()) {
 			            	World world = event.getPlayer().getWorld();
 			            	event.getRecipients().removeIf((Player player) -> !player.getWorld().equals(world));
 		            	}
 		            	event.setFormat(prefix + format);
 					} else {	            	
 						String prefix = "";
-						if (SkyWarsReloaded.getCfg().economyEnabled()) {
+						if (SkyWarsReloaded.getConfigManager().economyEnabled()) {
 							if (VaultUtils.get().getChat() != null) {
 								if (VaultUtils.get().getChat().getPlayerPrefix(event.getPlayer()) != null) {
 									prefix = VaultUtils.get().getChat().getPlayerPrefix(event.getPlayer());
@@ -224,7 +224,7 @@ public class ChatListener implements Listener {
 						}
 						PlayerStat ps = PlayerStat.getPlayerStats(event.getPlayer());
 						if (ps != null) {
-                            if (SkyWarsReloaded.getCfg().limitLobbyChat()) {
+                            if (SkyWarsReloaded.getConfigManager().limitLobbyChat()) {
                                 World world = event.getPlayer().getWorld();
                                 event.getRecipients().removeIf((Player player) -> !player.getWorld().equals(world));
                             }

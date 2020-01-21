@@ -4,26 +4,26 @@ import com.walrusone.skywarsreloaded.commands.BaseCmd;
 import com.walrusone.skywarsreloaded.game.GameMap;
 import com.walrusone.skywarsreloaded.utilities.Messaging;
 
-public class SaveCmd extends BaseCmd { 
-	
-	public SaveCmd(String t) {
-		type = t;
-		forcePlayer = true;
-		cmdName = "save";
-		alias = new String[]{"s"};
-		argLength = 2; //counting cmdName
+public class SaveCmd extends BaseCmd {
 
-	}
+    public SaveCmd(String t) {
+        type = t;
+        forcePlayer = true;
+        cmdName = "save";
+        alias = new String[]{"s"};
+        argLength = 2; //counting cmdName
 
-	@Override
-	public boolean run() {
-			String worldName = args[1];
-			GameMap gMap = GameMap.getMap(worldName);
-			if (gMap == null || !gMap.isEditing()) {
-				player.sendMessage(new Messaging.MessageFormatter().format("error.map-does-not-exist"));
-				return true;
-			}
-			gMap.saveMap(player);
-	        return true;
-	}
+    }
+
+    @Override
+    public boolean run() {
+        String worldName = args[1];
+        GameMap gMap = GameMap.getMap(worldName);
+        if (gMap == null || !gMap.isEditing()) {
+            player.sendMessage(new Messaging.MessageFormatter().format("error.map-does-not-exist"));
+            return true;
+        }
+        gMap.saveMap(player);
+        return true;
+    }
 }
