@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.walrusone.skywarsreloaded</groupId>
-    <artifactId>skywarsreloaded-parent</artifactId>
+    <groupId>com.nymoout.skywars</groupId>
+    <artifactId>skywars-parent</artifactId>
     <version>4.1.3-Snapshot</version>
     <packaging>pom</packaging>
 
@@ -15,8 +15,8 @@
         <module>lobby</module>
     </modules>
 
-    <name>SkyWarsReloaded Parent</name>
-    <description>SkyWarsReloaded is a world based, feature rich SkyWars Plugin.</description>
+    <name>SkyWars Parent</name>
+    <description>SkyWars is a world based, feature rich SkyWars Plugin.</description>
     <inceptionYear>2015</inceptionYear>
     <url>https://www.spigotmc.org/resources/skywarsreloaded.3796/</url>
 

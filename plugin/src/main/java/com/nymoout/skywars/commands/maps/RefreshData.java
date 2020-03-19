@@ -1,0 +1,47 @@
+package com.nymoout.skywars.commands.maps;
+
+
+import com.nymoout.skywars.commands.BaseCmd;
+import com.nymoout.skywars.game.GameMap;
+import com.nymoout.skywars.utilities.Messaging;
+
+public class RefreshData extends BaseCmd {
+
+    public RefreshData(String t) {
+        type = t;
+        forcePlayer = false;
+        cmdName = "refresh";
+        alias = new String[]{"ref"};
+        argLength = 2; //counting cmdName
+    }
+
+    @Override
+    public boolean run() {
+        String name = args[1];
+        if (args[1].equalsIgnoreCase("all")) {
+            for (GameMap gMap : GameMap.getMaps()) {
+                refreshMap(gMap);
+            }
+        } else {
+            GameMap gMap = GameMap.getMap(name);
+            refreshMap(gMap);
+        }
+        return true;
+    }
+
+    private void refreshMap(GameMap gMap) {
+        if (gMap != null) {
+            boolean reregister = gMap.isRegistered();
+            if (reregister) {
+                gMap.unregister(false);
+                gMap.loadArenaData();
+                gMap.registerMap();
+            } else {
+                gMap.loadArenaData();
+            }
+            sender.sendMessage(new Messaging.MessageFormatter().setVariable("mapname", gMap.getDisplayName()).format("maps.refreshed"));
+        } else {
+            sender.sendMessage(new Messaging.MessageFormatter().format("error.map-does-not-exist"));
+        }
+    }
+}

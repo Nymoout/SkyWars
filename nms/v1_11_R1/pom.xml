@@ -5,19 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.walrusone.skywarsreloaded</groupId>
-        <artifactId>skywarsreloaded-nms</artifactId>
+        <groupId>com.nymoout.skywars</groupId>
+        <artifactId>skywars-nms</artifactId>
         <version>4.1.3-Snapshot</version>
     </parent>
 
-	<artifactId>skywarsreloaded-nms-v1_11_r1</artifactId>
+	<artifactId>skywars-nms-v1_11_r1</artifactId>
 
-	<name>SkyWarsReloaded NMS v1_11_R1</name>
+	<name>SkyWars NMS v1_11_R1</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-interfaces</artifactId>
+			<artifactId>skywars-nms-interfaces</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

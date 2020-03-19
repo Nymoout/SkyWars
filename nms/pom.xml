@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.walrusone.skywarsreloaded</groupId>
-        <artifactId>skywarsreloaded-parent</artifactId>
+        <groupId>com.nymoout.skywars</groupId>
+        <artifactId>skywars-parent</artifactId>
         <version>4.1.3-Snapshot</version>
     </parent>
 
-    <artifactId>skywarsreloaded-nms</artifactId>
+    <artifactId>skywars-nms</artifactId>
     <packaging>pom</packaging>
 
     <modules>
@@ -27,7 +27,7 @@
         <module>aggregated</module>
     </modules>
 
-    <name>SkyWarsReloaded NMS</name>
+    <name>SkyWars NMS</name>
 
     <repositories>
         <!-- NMS Repository -->

@@ -5,59 +5,59 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.walrusone.skywarsreloaded</groupId>
-        <artifactId>skywarsreloaded-nms</artifactId>
+        <groupId>com.nymoout.skywars</groupId>
+        <artifactId>skywars-nms</artifactId>
         <version>4.1.3-Snapshot</version>
     </parent>
 
-    <artifactId>skywarsreloaded-nms-aggregated</artifactId>
+    <artifactId>skywars-nms-aggregated</artifactId>
 	<packaging>pom</packaging>
-    <name>SkyWarsReloaded NMS Aggregated</name>
+    <name>SkyWars NMS Aggregated</name>
 
     <dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_8_r1</artifactId>
+			<artifactId>skywars-nms-v1_8_r1</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_8_r2</artifactId>
+			<artifactId>skywars-nms-v1_8_r2</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_8_r3</artifactId>
+			<artifactId>skywars-nms-v1_8_r3</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_9_r1</artifactId>
+			<artifactId>skywars-nms-v1_9_r1</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_9_r2</artifactId>
+			<artifactId>skywars-nms-v1_9_r2</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_10_r1</artifactId>
+			<artifactId>skywars-nms-v1_10_r1</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_11_r1</artifactId>
+			<artifactId>skywars-nms-v1_11_r1</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_12_r1</artifactId>
+			<artifactId>skywars-nms-v1_12_r1</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skywarsreloaded-nms-v1_13_r2</artifactId>
+			<artifactId>skywars-nms-v1_13_r2</artifactId>
 			<version>${project.version}</version>
 		</dependency>
     </dependencies>

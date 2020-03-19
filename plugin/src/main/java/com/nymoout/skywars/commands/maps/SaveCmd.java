@@ -1,0 +1,29 @@
+package com.nymoout.skywars.commands.maps;
+
+import com.nymoout.skywars.commands.BaseCmd;
+import com.nymoout.skywars.game.GameMap;
+import com.nymoout.skywars.utilities.Messaging;
+
+public class SaveCmd extends BaseCmd {
+
+    public SaveCmd(String t) {
+        type = t;
+        forcePlayer = true;
+        cmdName = "save";
+        alias = new String[]{"s"};
+        argLength = 2; //counting cmdName
+
+    }
+
+    @Override
+    public boolean run() {
+        String worldName = args[1];
+        GameMap gMap = GameMap.getMap(worldName);
+        if (gMap == null || !gMap.isEditing()) {
+            player.sendMessage(new Messaging.MessageFormatter().format("error.map-does-not-exist"));
+            return true;
+        }
+        gMap.saveMap(player);
+        return true;
+    }
+}

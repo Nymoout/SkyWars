@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.walrusone.skywarsreloaded</groupId>
-        <artifactId>skywarsreloaded-parent</artifactId>
+        <groupId>com.nymoout.skywars</groupId>
+        <artifactId>skywars-parent</artifactId>
         <version>4.1.3-Snapshot</version>
     </parent>
 
-    <artifactId>skywarsreloaded-lobby</artifactId>
+    <artifactId>skywars-lobby</artifactId>
 
-    <name>SkyWarsReloaded Lobby</name>
+    <name>SkyWars Lobby</name>
 
     <repositories>
         <repository>
@@ -28,7 +28,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>skywarsreloaded-nms-aggregated</artifactId>
+            <artifactId>skywars-nms-aggregated</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
             <scope>compile</scope>

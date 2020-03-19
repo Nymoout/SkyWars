@@ -434,11 +434,11 @@ leaderboard:
       line3: '&c{type}'
       line4: '&5{deaths}'
 helpList:
-  header: '&7-------------------[&aSkyWars&7]-------------------'
+  header: '&7-------------------&f[&aSkyWars&f]&7-------------------'
   footer: '&7-----------------------------------------------------'
   sw:
-    header1: '&7----------------[&aAdmin Commands&7]----------------'
-    header2: '&7----------------[&aPlayer Commands&7]----------------'
+    header1: '&7----------------&f[&aAdmin Commands&f]&7----------------'
+    header2: '&7----------------&f[&aPlayer Commands&f]&7----------------'
     updatetop: '&a/sw updatetop &e - &2Forces a leaderboard update'
     chestadd: '&a/sw chestadd &e[chesttype] [method] [percentage] &e- &2Adds item(s) in hand/inventory to the chesttype with the assigned percentage'
     chestedit: '&a/sw chestedit &e[chesttype] [percentage] &e- &2Opens an editable inventory for the items in the chestype with that percentage'
@@ -462,7 +462,7 @@ helpList:
     hologram: '&a/sw hologram [stat] [format] &e- &2Creates a leaderboard hologram at your eye location.'
     holoremove: '&a/sw holoremove &e- &2Removes the closest hologram leaderboard.'
   swmap: 
-    header1: '&7-----------------[&aMap Commands&7]-----------------'
+    header1: '&7-----------------&f[&aMap Commands&f]&7-----------------'
     create: '&a/swmap create &e[mapname] &e- &2Creates a map named &e[mapname]'
     creator: '&a/swmap creator &e[mapname] [creator] &e- &2Sets the [creator] for the map named [mapname]'
     delete: '&a/swmap delete &e[mapname] &e- &2Deletes the map named &e[mapname]'
@@ -479,7 +479,7 @@ helpList:
     chesttype: '&a/swmap chesttype &e- &2Toggles between the type of chest being placed (Normal or Center)'
     legacyload: '&a/swmap legacyload [mapname] &e- &2Loads the chests and player spawns of a map using the SWR Legacy Map Loader. Should only be used when pasting schematics. Do not run more than once per map!!'
   swkit:
-    header1: '&7-----------------[&aKit Commands&7]-----------------'
+    header1: '&7-----------------&f[&aKit Commands&f]&7-----------------'
     create: '&a/swkit create &e[kitname] &e- &2Create a kit using the items in your inventory'
     enable: '&a/swkit enable &e[kitname] &e- &2Toggles whether the kit is enabled or disabled'
     icon: '&a/swkit icon &e[kitname] &e- &2Sets the icon for the kit to the itemstack in your hand'
@@ -492,7 +492,7 @@ helpList:
     position: '&a/swkit position &e[kitname] [position] &e- &2Sets the icon position within the kit menu'
     update: '&a/swkit update &e[kitname] &e- &2Updates the kit <kitname> with your current inventory'
   swparty:
-    header1: '&7-----------------[&aParty Commands&7]-----------------'
+    header1: '&7-----------------&f[&aParty Commands&f]&7-----------------'
     accept: '&a/swparty accept &e- &2Accepts your current party invitation'
     decline: '&a/swparty decline &e- &2Declines your current party invitation'
     create: '&a/swparty create &e[partyname] &e- &2Creates a party named &e[partyname]'
