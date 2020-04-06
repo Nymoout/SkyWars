@@ -815,7 +815,7 @@ public class MatchManager {
 
                     prepareSpectateInv(player, gameMap);
 
-                    ItemStack exitItem = new ItemStack(Material.IRON_DOOR, 1);
+                    ItemStack exitItem = new ItemStack(Material.REDSTONE, 1);
                     ItemMeta exit = exitItem.getItemMeta();
                     exit.setDisplayName(new Messaging.MessageFormatter().format("spectate.exititemname"));
                     List<String> lore = new ArrayList<>();

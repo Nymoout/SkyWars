@@ -25,6 +25,7 @@ public class SWJoinCmd extends BaseCmd {
                 type = GameType.TEAM;
             }
         }
+
         boolean joined = MatchManager.get().joinGame(player, type);
         int count = 0;
         while (count < 4 && !joined) {
@@ -36,5 +37,4 @@ public class SWJoinCmd extends BaseCmd {
         }
         return true;
     }
-
 }

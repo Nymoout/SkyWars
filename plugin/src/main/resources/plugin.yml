@@ -99,7 +99,9 @@ permissions:
       sw.join: true
       sw.stats: true
       sw.top: true
-      sw.quit: true 
+      sw.quit: true
+      sw.rejoin: true
+      sw.leave: true
   sw.join: 
     description: Allows a player to use sw join command.
     default: true
@@ -114,6 +116,12 @@ permissions:
     default: true
   sw.quit: 
     description: Allows a player to use sw quit command.
+    default: true
+  sw.rejoin:
+    description: Allows a player to use sw rejoin command.
+    default: true
+  sw.leave:
+    description: Allows a player to use sw leave command.
     default: true
   sw.winsound:
     description: Allows a player to use sw winsound command.

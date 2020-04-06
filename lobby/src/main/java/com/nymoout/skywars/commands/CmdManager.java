@@ -13,6 +13,7 @@ import com.nymoout.skywars.utilities.Messaging;
 import com.nymoout.skywars.utilities.Util;
 
 public class CmdManager implements CommandExecutor {
+
 	private List<BaseCmd> mapcmds = new ArrayList<BaseCmd>();
 	private List<BaseCmd> kitcmds = new ArrayList<BaseCmd>();
 	private List<BaseCmd> admincmds = new ArrayList<BaseCmd>();

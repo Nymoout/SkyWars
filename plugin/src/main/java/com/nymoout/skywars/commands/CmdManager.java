@@ -34,6 +34,8 @@ public class CmdManager implements CommandExecutor {
         pcmds.add(new SWStatsCmd("sw"));
         pcmds.add(new SWTopCmd("sw"));
         pcmds.add(new SWOptionsCmd("sw"));
+        pcmds.add(new com.nymoout.skywars.commands.player.SWLeaveSpecCmd("sw"));
+        pcmds.add(new com.nymoout.skywars.commands.player.SWReJoinCmd("sw"));
         pcmds.add(new com.nymoout.skywars.commands.player.SWSpectateCmd("sw"));
 
         if (SkyWars.getConfigManager().winsoundMenuEnabled()) {

@@ -52,6 +52,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 @SuppressWarnings("UnstableApiUsage")
 public class SkyWars extends JavaPlugin implements PluginMessageListener {
+
 	private static SkyWars instance;
 	private ArrayList<String> useable = new ArrayList<>();
 	private Messaging messaging;

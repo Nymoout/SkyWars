@@ -125,6 +125,9 @@ public class PlayerStat {
                                     if (SkyWars.getConfigManager().spectateMenuEnabled() && player.hasPermission("sw.spectate")) {
                                         player.getInventory().setItem(SkyWars.getConfigManager().getSpectateSlot(), SkyWars.getItemsManager().getItem("spectateselect"));
                                     }
+                                    if (SkyWars.getConfigManager().autoJoinEnable()) {
+                                        player.getInventory().setItem(SkyWars.getConfigManager().getAutojoinSlot(), SkyWars.getItemsManager().getItem("autojoinselect"));
+                                    }
                                     player.updateInventory();
                                 }
                             }

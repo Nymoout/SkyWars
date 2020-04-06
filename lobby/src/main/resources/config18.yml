@@ -36,6 +36,8 @@ items:
   winsoundselect: DRAGON_EGG
   glassselect: STAINED_GLASS
   tauntselect: SHIELD
+  autojoinselect: BOW
+
 enabledMenus:
   join: true
   joinSlot: 0
@@ -47,6 +49,8 @@ enabledMenus:
   killsound: true
   winsound: true
   taunts: true
+  autojoin: true
+  autojoinSlot: 2
 leaderboards:
   length: 10
   leaderboardUpdateInterval: 300

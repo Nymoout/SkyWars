@@ -175,6 +175,7 @@ items:
   glassselectslot: 9 
   tauntselect: SHIELD
   tauntselectslot: 17
+  autojoinselect: BOW
 particles:
   enabled: true
   ticksperupdate: 3
@@ -191,6 +192,8 @@ enabledMenus:
   killsound: true
   winsound: true
   taunts: true
+  autojoin: true
+  autojoinSlot: 2
 sqldatabase:
   enabled: false
   hostname: localhost

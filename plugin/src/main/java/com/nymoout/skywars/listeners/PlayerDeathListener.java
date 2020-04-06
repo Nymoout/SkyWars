@@ -5,6 +5,8 @@ import com.nymoout.skywars.game.GameMap;
 import com.nymoout.skywars.game.PlayerData;
 import com.nymoout.skywars.managers.MatchManager;
 import com.nymoout.skywars.managers.PlayerStat;
+import com.nymoout.skywars.utilities.ChatSerializerUtil;
+import com.nymoout.skywars.utilities.Serializers;
 import com.nymoout.skywars.utilities.Util;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -20,49 +22,50 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class PlayerDeathListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onDeath2(final PlayerDeathEvent v2) {
-        final GameMap gameMap = MatchManager.get().getPlayerMap(v2.getEntity());
+    public void onDeath2(final PlayerDeathEvent e) {
+        final GameMap gameMap = MatchManager.get().getPlayerMap(e.getEntity());
 
         if (gameMap == null) {
             return;
         }
 
-        final Player player = v2.getEntity();
-        v2.getEntity().getInventory().clear();
-        v2.getEntity().getInventory().setArmorContents(null);
+        final Player player = e.getEntity();
+        e.getEntity().getInventory().clear();
+        e.getEntity().getInventory().setArmorContents(null);
 
         DamageCause damageCause = DamageCause.CUSTOM;
-        if (v2.getEntity().getLastDamageCause() != null) {
-            damageCause = v2.getEntity().getLastDamageCause().getCause();
+        if (e.getEntity().getLastDamageCause() != null) {
+            damageCause = e.getEntity().getLastDamageCause().getCause();
         }
         final DamageCause dCause = damageCause;
-        v2.setDeathMessage("");
-
+        player.getWorld().strikeLightningEffect(player.getLocation());
+        e.setDeathMessage("");
+        Serializers.sendMessageAutoJoin(player);
         MatchManager.get().playerLeave(player, dCause, false, true, true);
     }
 
     @EventHandler
-    public void onRespawn(final PlayerRespawnEvent a1) {
-        final PlayerData pData = PlayerData.getPlayerData(a1.getPlayer().getUniqueId());
+    public void onRespawn(final PlayerRespawnEvent e) {
+        final PlayerData pData = PlayerData.getPlayerData(e.getPlayer().getUniqueId());
         if (pData != null) {
             if (SkyWars.getConfigManager().spectateEnable()) {
-                final GameMap gMap = MatchManager.get().getDeadPlayerMap(a1.getPlayer());
+                final GameMap gMap = MatchManager.get().getDeadPlayerMap(e.getPlayer());
                 if (gMap != null) {
                     World world = gMap.getCurrentWorld();
                     Location respawn = new Location(world, 0, 95, 0);
-                    a1.setRespawnLocation(respawn);
+                    e.setRespawnLocation(respawn);
                     new BukkitRunnable() {
                         public void run() {
-                            MatchManager.get().addSpectator(gMap, a1.getPlayer());
+                            MatchManager.get().addSpectator(gMap, e.getPlayer());
                         }
                     }.runTaskLater(SkyWars.get(), 15L);
                 }
             } else {
-                final GameMap gMap = MatchManager.get().getDeadPlayerMap(a1.getPlayer());
+                final GameMap gMap = MatchManager.get().getDeadPlayerMap(e.getPlayer());
                 if (gMap != null) {
                     World world = gMap.getCurrentWorld();
                     Location respawn = new Location(world, 0, 200, 0);
-                    a1.setRespawnLocation(respawn);
+                    e.setRespawnLocation(respawn);
                     new BukkitRunnable() {
                         public void run() {
                             pData.restore(false);
@@ -71,9 +74,9 @@ public class PlayerDeathListener implements Listener {
                 }
             }
         }
-        if (Util.get().isSpawnWorld(a1.getPlayer().getWorld())) {
-            a1.setRespawnLocation(SkyWars.getConfigManager().getSpawn());
-            PlayerStat.updatePlayer(a1.getPlayer().getUniqueId().toString());
+        if (Util.get().isSpawnWorld(e.getPlayer().getWorld())) {
+            e.setRespawnLocation(SkyWars.getConfigManager().getSpawn());
+            PlayerStat.updatePlayer(e.getPlayer().getUniqueId().toString());
         }
     }
 }

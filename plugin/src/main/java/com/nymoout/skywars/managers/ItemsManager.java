@@ -67,6 +67,7 @@ public class ItemsManager {
         addItem("spectateselect", lore, "items.spectatemenu");
 		addItem("singlemenu", lore, "items.joinsingle");
 		addItem("teammenu", lore, "items.jointeam");
+		addItem("autojoinselect", lore,"items.autojoin");
     }
 
 	private void getMatchStartItems() {

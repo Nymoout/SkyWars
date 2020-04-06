@@ -105,6 +105,9 @@ public class PlayerStat {
                                     if (SkyWars.getCfg().optionsMenuEnabled()) {
                                         player.getInventory().setItem(SkyWars.getCfg().getOptionsSlot(), SkyWars.getIM().getItem("optionselect"));
                                     }
+                                    if (SkyWars.getCfg().autoJoinEnable()) {
+                                        player.getInventory().setItem(SkyWars.getCfg().getAutojoinSlot(), SkyWars.getIM().getItem("autojoinselect"));
+                                    }
                                     player.updateInventory();
                                 }
                             }

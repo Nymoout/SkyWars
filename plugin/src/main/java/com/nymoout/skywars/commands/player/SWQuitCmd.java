@@ -11,7 +11,7 @@ public class SWQuitCmd extends BaseCmd {
         type = t;
         forcePlayer = true;
         cmdName = "quit";
-        alias = new String[]{"q", "leave", "l"};
+        alias = new String[]{"q"};
         argLength = 1; //counting cmdName
     }
 

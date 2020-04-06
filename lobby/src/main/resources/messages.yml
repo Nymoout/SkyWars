@@ -203,6 +203,7 @@ items:
   winsound-sel: '&bWIN SOUND SELECTION MENU'
   glass-sel: '&bGLASS COLOR SELECTION MENU'
   taunt-sel: '&bTAUNT SELECTION MENU'
+  autojoin: '&bAuto Join'
 timer:
   game-timer: '&4SkyWars Sudden Death starts in &e{time}!'
   wait-timer: '&4SkyWars starting in: &e{time}'
@@ -334,6 +335,8 @@ helpList:
   clearstats: '&a/sw removestats &e[playername] &e- &2Clears a SkyWars players stats'
   start: '&a/sw forcestart &e- &2Forces a SkyWars match to Start'
   join: '&a/sw join &e- &2Join a SkyWars match'
+  rejoin: '&a/sw rejoin &e- &2rejoin a SkyWars match'
+  leave: '&a/sw leave &e- &2leave a SkyWars match'
   reload: '&a/sw reload &e- &2Reloads SkyWars'
   stats: '&a/sw stats &e[playername] &e- &2Shows a players stats'
   top: '&a/sw top [stat] &e- &2Displays SkyWars leaderboard'

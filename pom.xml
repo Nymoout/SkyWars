@@ -6,7 +6,7 @@
 
     <groupId>com.nymoout.skywars</groupId>
     <artifactId>skywars-parent</artifactId>
-    <version>4.1.3-Snapshot</version>
+    <version>4.1.4-Snapshot</version>
     <packaging>pom</packaging>
 
     <modules>

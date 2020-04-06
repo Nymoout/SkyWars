@@ -29,7 +29,8 @@ public class ItemsManager {
         lore.add(new Messaging.MessageFormatter().format("items.click-to-open"));
         
         addItem("joinselect", lore, "items.joinmenu");
-        addItem("optionselect", lore, "items.skywars-options"); 
+        addItem("optionselect", lore, "items.skywars-options");
+        addItem("autojoinselect", lore,"items.autojoin");
     }
     
     private void getOptionItems() {

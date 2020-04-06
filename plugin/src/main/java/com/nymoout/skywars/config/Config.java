@@ -91,6 +91,7 @@ public class Config {
     private int fireworksPer5Tick;
     private int maxMapSize;
     private Location spawn;
+
     private boolean pressurePlate;
     private boolean teleportOnJoin;
     private boolean teleportOnWorldEnter;
@@ -129,8 +130,10 @@ public class Config {
     private boolean killSoundEnabled;
     private boolean winSoundEnabled;
     private boolean tauntSMenuEnabled;
-
     private boolean playSounds;
+    private int autojoinSlot;
+    private boolean autojoinEnable;
+
     private String countdown;
     private String joinSound;
     private String leaveSound;
@@ -187,7 +190,8 @@ public class Config {
             "projectileselect",
             "killsoundselect", "killsounditem",
             "winsoundselect",
-            "glassselect", "tauntselect");
+            "glassselect", "tauntselect",
+            "autojoinselect");
     private final List<String> defItems13 = Arrays.asList("ENDER_EYE", "COMPASS",
             "BARRIER", "FEATHER", "FEATHER",
             "IRON_DOOR",
@@ -225,7 +229,8 @@ public class Config {
             "ARROW",
             "DIAMOND_SWORD", "NOTE_BLOCK",
             "DRAGON_EGG",
-            "STAINED_GLASS", "SHIELD");
+            "STAINED_GLASS", "SHIELD",
+            "BOW");
     private final List<String> defItems8 = Arrays.asList("EYE_OF_ENDER", "COMPASS",
             "BARRIER", "FEATHER", "FEATHER",
             "IRON_DOOR",
@@ -244,7 +249,8 @@ public class Config {
             "ARROW",
             "DIAMOND_SWORD", "NOTE_BLOCK",
             "DRAGON_EGG",
-            "STAINED_GLASS", "DRAGON_EGG");
+            "STAINED_GLASS", "DRAGON_EGG",
+            "BOW");
 
     private final List<String> signItems = Arrays.asList("blockoffline", "blockwaiting", "blockplaying", "blockending", "almostfull", "threefull", "halffull", "almostempty");
     private final List<String> signDef8 = Arrays.asList("COAL_BLOCK", "EMERALD_BLOCK", "REDSTONE_BLOCK", "LAPIS_BLOCK", "DIAMOND_HELMET", "GOLD_HELMET", "IRON_HELMET", "LEATHER_HELMET");
@@ -391,6 +397,8 @@ public class Config {
             killSoundEnabled = SkyWars.get().getConfig().getBoolean("enabledMenus.killsound");
             winSoundEnabled = SkyWars.get().getConfig().getBoolean("enabledMenus.winsound");
             tauntSMenuEnabled = SkyWars.get().getConfig().getBoolean("enabledMenus.taunts");
+            autojoinEnable = SkyWars.get().getConfig().getBoolean("enabledMenus.autojoin");
+            autojoinSlot = SkyWars.get().getConfig().getInt("enabledMenus.autojoinSlot");
 
             playSounds = SkyWars.get().getConfig().getBoolean("sounds.enabled");
             countdown = SkyWars.get().getConfig().getString("sounds.countdown");
@@ -601,6 +609,8 @@ public class Config {
         SkyWars.get().getConfig().set("enabledMenus.killsound", killSoundEnabled);
         SkyWars.get().getConfig().set("enabledMenus.winsound", winSoundEnabled);
         SkyWars.get().getConfig().set("enabledMenus.taunts", tauntSMenuEnabled);
+        SkyWars.get().getConfig().set("enabledMenus.autojoin", autojoinEnable);
+        SkyWars.get().getConfig().set("enabledMenus.autojoinSlot", autojoinSlot);
 
         SkyWars.get().getConfig().set("sounds.enabled", playSounds);
         SkyWars.get().getConfig().set("sounds.countdown", countdown);
@@ -1197,5 +1207,13 @@ public class Config {
 
     public List<String> getGameEndCommands() {
         return gameEndCommands;
+    }
+
+    public int getAutojoinSlot() {
+        return autojoinSlot;
+    }
+
+    public boolean autoJoinEnable() {
+        return autojoinEnable;
     }
 }

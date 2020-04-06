@@ -20,6 +20,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -156,6 +157,7 @@ public class LobbyListener implements Listener {
             GameMap gMap = MatchManager.get().getPlayerMap(player);
             if (gMap == null) {
                 if (e.getAction() == Action.PHYSICAL && (e.getClickedBlock().getType() == SkyWars.getNMS().getMaterial("STONE_PLATE").getType()
+                        || e.getClickedBlock().getType() == SkyWars.getNMS().getMaterial("IRON_PLATE").getType()
                         || e.getClickedBlock().getType() == SkyWars.getNMS().getMaterial("GOLD_PLATE").getType())) {
                     if (SkyWars.getConfigManager().pressurePlateJoin()) {
                         Location spawn = SkyWars.getConfigManager().getSpawn();
@@ -217,19 +219,30 @@ public class LobbyListener implements Listener {
     public void onJumpPlayer(final PlayerMoveEvent e) {
         Player player = e.getPlayer();
         if (Util.get().isSpawnWorld(player.getWorld())) {
-            if (player.getLocation().getBlock().getType() == SkyWars.getNMS().getMaterial("IRON_PLATE").getType()) {
-                Vector v = player.getLocation().getDirection().multiply(3.5D).setY(1.5D);
+            Location blockUnderPlayer = player.getLocation();
+            blockUnderPlayer.setY(blockUnderPlayer.getY() - 1);
+            if (blockUnderPlayer.getBlock().getType() == SkyWars.getNMS().getMaterial("SLIME_BLOCK").getType()) {
+                Vector v = player.getLocation().getDirection().multiply(4.5D).setY(1.5D);
                 player.setVelocity(v);
                 SkyWars.getNMS().playGameSound(player.getLocation(), "ENDERDRAGON_WINGS", 4.0F, 3.0F, false);
-                SkyWars.getNMS().sendParticles(player.getWorld(), "NOTE", player.getLocation().getBlockX(),
-                        player.getLocation().getBlockY(), player.getLocation().getBlockZ(), player.getLocation().getBlockX(),
-                        player.getLocation().getBlockY(), player.getLocation().getBlockZ(), 4.0F, 3);
+            }
+            if (player.getLocation().getY() < 0){
+                player.teleport(SkyWars.getConfigManager().getSpawn());
             }
         }
     }
 
     @EventHandler
     public void onPlayerDamage(final EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            if (Util.get().isSpawnWorld(e.getEntity().getWorld())) {
+                e.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerLosesFood(final FoodLevelChangeEvent e) {
         if (e.getEntity() instanceof Player) {
             if (Util.get().isSpawnWorld(e.getEntity().getWorld())) {
                 e.setCancelled(true);
