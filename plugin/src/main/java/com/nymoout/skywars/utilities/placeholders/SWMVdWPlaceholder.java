@@ -7,9 +7,9 @@ import org.bukkit.plugin.Plugin;
 
 import be.maximvdw.placeholderapi.PlaceholderAPI;
 
-public class SWRMVdWPlaceholder {
+public class SWMVdWPlaceholder {
 
-	public SWRMVdWPlaceholder(Plugin p) {
+	public SWMVdWPlaceholder(Plugin p) {
 
 		PlaceholderAPI.registerPlaceholder(p, "sw_elo", e -> {
             Player player = e.getPlayer();

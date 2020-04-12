@@ -81,6 +81,8 @@ public class SpectateListener implements Listener {
             player.closeInventory();
             gameMap.getSpectators().remove(player.getUniqueId());
             MatchManager.get().removeSpectator(player);
+        } else if(slot == 0){
+            player.performCommand("sw rejoin");
         } else if (slot >= 9 && slot <= 35) {
             player.closeInventory();
             ItemStack item = e.getCurrentItem();

@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.*;
 
 public class Leaderboard {
+
     private static HashMap<LeaderType, List<LeaderData>> topLeaders = new HashMap<>();
     private static HashMap<LeaderType, ArrayList<LeaderData>> leaders = new HashMap<>();
     private static HashMap<LeaderType, Boolean> loaded = new HashMap<>();

@@ -1,11 +1,10 @@
 package com.nymoout.skywars.commands.party;
 
 import com.nymoout.skywars.commands.BaseCmd;
-import com.nymoout.skywars.utilities.JSONMessage;
 import com.nymoout.skywars.utilities.Messaging;
 import com.nymoout.skywars.utilities.Party;
+import com.nymoout.skywars.utilities.Serializers;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class InviteCmd extends BaseCmd {
@@ -48,12 +47,7 @@ public class InviteCmd extends BaseCmd {
             party.invite(invited);
             invited.sendMessage(new Messaging.MessageFormatter().setVariable("leader", player.getName()).setVariable("partyname", party.getPartyName()).format("party.invite"));
 
-            JSONMessage.create(new Messaging.MessageFormatter().format("party.clicktoaccept"))
-                    .color(ChatColor.GOLD)
-                    .tooltip(new Messaging.MessageFormatter().format("party.clicktoaccept"))
-                    .color(ChatColor.AQUA)
-                    .runCommand("/swp a")
-                    .send(invited);
+            Serializers.sendPartyAccept(invited);
 
             player.sendMessage(new Messaging.MessageFormatter().setVariable("player", invited.getName()).format("party.invited"));
         } else {

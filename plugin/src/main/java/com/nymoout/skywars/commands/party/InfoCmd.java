@@ -36,5 +36,4 @@ public class InfoCmd extends BaseCmd {
         player.sendMessage(new Messaging.MessageFormatter().setVariable("members", members.toString()).format("party.info3"));
         return true;
     }
-
 }

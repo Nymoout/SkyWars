@@ -1,7 +1,7 @@
 package com.nymoout.skywars.game;
 
-import com.nymoout.skywars.enums.MatchState;
 import com.nymoout.skywars.SkyWars;
+import com.nymoout.skywars.enums.MatchState;
 import com.nymoout.skywars.enums.ScoreVar;
 import com.nymoout.skywars.utilities.Messaging;
 import com.nymoout.skywars.utilities.Util;
@@ -18,9 +18,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GameBoard {
+
     private GameMap gMap;
     private Scoreboard scoreboard;
     private Objective objective;
+    //private int onlinePlayers;
     private int restartTimer;
     private Map<ScoreVar, Integer> waitboard = new HashMap<>();
     private Map<ScoreVar, Integer> playboard = new HashMap<>();
@@ -196,6 +198,22 @@ public class GameBoard {
             }.runTaskTimer(SkyWars.get(), 0, 20);
         }
     }
+
+    /*private void getOnlinePlayers() {
+        onlinePlayers = 2;
+        if (SkyWars.get().isEnabled()) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    onlinePlayers--;
+                    if (onlinePlayers == 0) {
+                        this.cancel();
+                    }
+                    updateScoreboardVar(ScoreVar.ONLINE_PLAYERS);
+                }
+            }.runTaskTimer(SkyWars.get(), 0, 20);
+        }
+    }*/
 
     private String getScoreboardLine(String lineNum) {
         return new Messaging.MessageFormatter()

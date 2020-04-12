@@ -6,7 +6,7 @@ import com.nymoout.skywars.enums.ChestPlacementType;
 import com.nymoout.skywars.enums.GameType;
 import com.nymoout.skywars.enums.MatchState;
 import com.nymoout.skywars.enums.ScoreVar;
-import com.nymoout.skywars.game.cages.Cage;
+import com.nymoout.skywars.game.cages.*;
 import com.nymoout.skywars.managers.MatchManager;
 import com.nymoout.skywars.managers.PlayerStat;
 import com.nymoout.skywars.managers.WorldManager;
@@ -15,8 +15,7 @@ import com.nymoout.skywars.menus.ArenaMenu;
 import com.nymoout.skywars.menus.ArenasMenu;
 import com.nymoout.skywars.menus.TeamSelectionMenu;
 import com.nymoout.skywars.menus.TeamSpectateMenu;
-import com.nymoout.skywars.menus.gameoptions.KitVoteOption;
-import com.nymoout.skywars.menus.gameoptions.WeatherOption;
+import com.nymoout.skywars.menus.gameoptions.*;
 import com.nymoout.skywars.menus.gameoptions.objects.CoordLoc;
 import com.nymoout.skywars.menus.gameoptions.objects.GameKit;
 import com.nymoout.skywars.utilities.Messaging;
@@ -31,6 +30,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.scheduler.BukkitRunnable;
+
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
@@ -77,17 +77,17 @@ public class GameMap {
     private String currentWeather;
     private String currentModifier;
     private KitVoteOption kitVoteOption;
-    private com.nymoout.skywars.menus.gameoptions.ChestOption chestOption;
-    private com.nymoout.skywars.menus.gameoptions.HealthOption healthOption;
-    private com.nymoout.skywars.menus.gameoptions.TimeOption timeOption;
+    private ChestOption chestOption;
+    private HealthOption healthOption;
+    private TimeOption timeOption;
     private WeatherOption weatherOption;
-    private com.nymoout.skywars.menus.gameoptions.ModifierOption modifierOption;
+    private ModifierOption modifierOption;
     private ArrayList<CoordLoc> chests;
     private ArrayList<CoordLoc> centerChests;
     private String environment;
     private String displayName;
     private String designedBy;
-    private ArrayList<SWRSign> signs;
+    private ArrayList<SWSign> signs;
     private GameBoard gameboard;
     private boolean registered;
     private String arenakey;
@@ -121,11 +121,11 @@ public class GameMap {
         if (SkyWars.getConfigManager().kitVotingEnabled()) {
             kitVoteOption = new KitVoteOption(this, name + "kitVote");
         }
-        chestOption = new com.nymoout.skywars.menus.gameoptions.ChestOption(this, name + "chest");
-        healthOption = new com.nymoout.skywars.menus.gameoptions.HealthOption(this, name + "health");
-        timeOption = new com.nymoout.skywars.menus.gameoptions.TimeOption(this, name + "time");
+        chestOption = new ChestOption(this, name + "chest");
+        healthOption = new HealthOption(this, name + "health");
+        timeOption = new TimeOption(this, name + "time");
         weatherOption = new WeatherOption(this, name + "weather");
-        modifierOption = new com.nymoout.skywars.menus.gameoptions.ModifierOption(this, name + "modifier");
+        modifierOption = new ModifierOption(this, name + "modifier");
         gameboard = new GameBoard(this);
         if (legacy) {
             boolean loaded = loadWorldForScanning(name);
@@ -348,7 +348,7 @@ public class GameMap {
         } else {
             for (ArrayList<Player> play : players.values()) {
                 for (Player player : play) {
-                    com.nymoout.skywars.game.PlayerCard pCard = this.getPlayerCard(player);
+                    PlayerCard pCard = this.getPlayerCard(player);
                     pCard.reset();
                 }
             }
@@ -375,7 +375,7 @@ public class GameMap {
     public ArrayList<Player> getAlivePlayers() {
         ArrayList<Player> alivePlayers = new ArrayList<>();
         for (TeamCard tCard : teamCards) {
-            for (com.nymoout.skywars.game.PlayerCard pCard : tCard.getPlayerCards()) {
+            for (PlayerCard pCard : tCard.getPlayerCards()) {
                 if (pCard.getPlayer() != null) {
                     if (!mapContainsDead(pCard.getPlayer().getUniqueId())) {
                         alivePlayers.add(pCard.getPlayer());
@@ -398,7 +398,7 @@ public class GameMap {
     public ArrayList<Player> getAllPlayers() {
         ArrayList<Player> allPlayers = new ArrayList<>();
         for (TeamCard tCard : teamCards) {
-            for (com.nymoout.skywars.game.PlayerCard pCard : tCard.getPlayerCards()) {
+            for (PlayerCard pCard : tCard.getPlayerCards()) {
                 if (pCard.getPlayer() != null) {
                     allPlayers.add(pCard.getPlayer());
                 }
@@ -411,7 +411,7 @@ public class GameMap {
         ArrayList<Player> recievers = new ArrayList<>();
         if (!isSpectator) {
             for (TeamCard tCard : teamCards) {
-                for (com.nymoout.skywars.game.PlayerCard pCard : tCard.getPlayerCards()) {
+                for (PlayerCard pCard : tCard.getPlayerCards()) {
                     if (pCard.getPlayer() != null) {
                         if (!mapContainsDead(pCard.getPlayer().getUniqueId())) {
                             recievers.add(pCard.getPlayer());
@@ -604,7 +604,7 @@ public class GameMap {
         fc.set("deathMatchSpawns", dSpawns);
 
         List<String> stringSigns = new ArrayList<>();
-        for (SWRSign s : signs) {
+        for (SWSign s : signs) {
             stringSigns.add(Util.get().locationToString(s.getLocation()));
         }
         fc.set("signs", stringSigns);
@@ -652,7 +652,7 @@ public class GameMap {
         allowScanvenger = fc.getBoolean("allowScanvenger", false);
 
         String cage = fc.getString("cage");
-        com.nymoout.skywars.game.cages.CageType ct = com.nymoout.skywars.game.cages.CageType.matchType(cage.toUpperCase());
+        CageType ct = CageType.matchType(cage.toUpperCase());
         setCage(ct);
 
         List<String> spawns = fc.getStringList("spawns");
@@ -679,7 +679,7 @@ public class GameMap {
 
         signs.clear();
         for (String s : stringSigns) {
-            signs.add(new SWRSign(name, Util.get().stringToLocation(s)));
+            signs.add(new SWSign(name, Util.get().stringToLocation(s)));
         }
 
         chests.clear();
@@ -812,13 +812,13 @@ public class GameMap {
                 }
             }
         }
-        sorted.sort(new com.nymoout.skywars.game.GameMapComparator());
+        sorted.sort(new GameMapComparator());
         return sorted;
     }
 
     public static ArrayList<GameMap> getSortedArenas() {
         ArrayList<GameMap> sorted = new ArrayList<>(arenas);
-        sorted.sort(new com.nymoout.skywars.game.GameMapComparator());
+        sorted.sort(new GameMapComparator());
         return sorted;
     }
 
@@ -1047,7 +1047,7 @@ public class GameMap {
 
     public void setKitVote(Player player, GameKit kit2) {
         for (TeamCard tCard : teamCards) {
-            for (com.nymoout.skywars.game.PlayerCard pCard : tCard.getPlayerCards()) {
+            for (PlayerCard pCard : tCard.getPlayerCards()) {
                 if (pCard.getPlayer() != null && pCard.getPlayer().equals(player)) {
                     pCard.setKitVote(kit2);
                     return;
@@ -1058,7 +1058,7 @@ public class GameMap {
 
     public GameKit getSelectedKit(Player player) {
         for (TeamCard tCard : teamCards) {
-            for (com.nymoout.skywars.game.PlayerCard pCard : tCard.getPlayerCards()) {
+            for (PlayerCard pCard : tCard.getPlayerCards()) {
                 if (pCard != null) {
                     if (pCard.getPlayer() != null && pCard.getPlayer().equals(player)) {
                         return pCard.getKitVote();
@@ -1092,18 +1092,18 @@ public class GameMap {
     /*Sign Methods*/
 
     private void updateSigns() {
-        for (SWRSign s : signs) {
+        for (SWSign s : signs) {
             s.update();
         }
     }
 
-    public List<SWRSign> getSigns() {
+    public List<SWSign> getSigns() {
         return this.signs;
     }
 
 
     public boolean hasSign(Location loc) {
-        for (SWRSign s : signs) {
+        for (SWSign s : signs) {
             if (s.getLocation().equals(loc)) {
                 return true;
             }
@@ -1112,8 +1112,8 @@ public class GameMap {
     }
 
     public boolean removeSign(Location loc) {
-        SWRSign sign = null;
-        for (SWRSign s : signs) {
+        SWSign sign = null;
+        for (SWSign s : signs) {
             if (s.getLocation().equals(loc)) {
                 sign = s;
             }
@@ -1128,7 +1128,7 @@ public class GameMap {
     }
 
     public void addSign(Location loc) {
-        signs.add(new SWRSign(name, loc));
+        signs.add(new SWSign(name, loc));
         saveArenaData();
         updateSigns();
     }
@@ -1164,7 +1164,7 @@ public class GameMap {
     public int getPlayerCount() {
         int count = 0;
         for (TeamCard tCard : teamCards) {
-            for (com.nymoout.skywars.game.PlayerCard pCard : tCard.getPlayerCards()) {
+            for (PlayerCard pCard : tCard.getPlayerCards()) {
                 if (pCard.getPreElo() != -1) {
                     count++;
                 }
@@ -1249,17 +1249,17 @@ public class GameMap {
     }
 
 
-    public ArrayList<com.nymoout.skywars.game.PlayerCard> getPlayerCards() {
-        ArrayList<com.nymoout.skywars.game.PlayerCard> cards = new ArrayList<>();
+    public ArrayList<PlayerCard> getPlayerCards() {
+        ArrayList<PlayerCard> cards = new ArrayList<>();
         for (TeamCard tCard : teamCards) {
             cards.addAll(tCard.getPlayerCards());
         }
         return cards;
     }
 
-    public com.nymoout.skywars.game.PlayerCard getPlayerCard(Player player) {
+    public PlayerCard getPlayerCard(Player player) {
         for (TeamCard tCard : teamCards) {
-            for (com.nymoout.skywars.game.PlayerCard pCard : tCard.getPlayerCards()) {
+            for (PlayerCard pCard : tCard.getPlayerCards()) {
                 if (pCard.getPlayer() != null && pCard.getPlayer().equals(player)) {
                     return pCard;
                 }
@@ -1341,19 +1341,19 @@ public class GameMap {
         currentWeather = voteString;
     }
 
-    public com.nymoout.skywars.menus.gameoptions.GameOption getChestOption() {
+    public GameOption getChestOption() {
         return chestOption;
     }
 
-    public com.nymoout.skywars.menus.gameoptions.GameOption getTimeOption() {
+    public GameOption getTimeOption() {
         return timeOption;
     }
 
-    public com.nymoout.skywars.menus.gameoptions.GameOption getWeatherOption() {
+    public GameOption getWeatherOption() {
         return weatherOption;
     }
 
-    public com.nymoout.skywars.menus.gameoptions.GameOption getModifierOption() {
+    public GameOption getModifierOption() {
         return modifierOption;
     }
 
@@ -1686,25 +1686,25 @@ public class GameMap {
         return cage;
     }
 
-    public void setCage(com.nymoout.skywars.game.cages.CageType next) {
+    public void setCage(CageType next) {
         switch (next) {
             case CUBE:
-                this.cage = new com.nymoout.skywars.game.cages.CubeCage();
+                this.cage = new CubeCage();
                 break;
             case DOME:
-                this.cage = new com.nymoout.skywars.game.cages.DomeCage();
+                this.cage = new DomeCage();
                 break;
             case PYRAMID:
-                this.cage = new com.nymoout.skywars.game.cages.PyramidCage();
+                this.cage = new PyramidCage();
                 break;
             case SPHERE:
-                this.cage = new com.nymoout.skywars.game.cages.SphereCage();
+                this.cage = new SphereCage();
                 break;
             case STANDARD:
-                this.cage = new com.nymoout.skywars.game.cages.StandardCage();
+                this.cage = new StandardCage();
                 break;
             default:
-                this.cage = new com.nymoout.skywars.game.cages.StandardCage();
+                this.cage = new StandardCage();
         }
         saveArenaData();
     }

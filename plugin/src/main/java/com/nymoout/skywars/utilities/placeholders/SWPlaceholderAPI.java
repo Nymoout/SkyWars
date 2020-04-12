@@ -1,18 +1,18 @@
 package com.nymoout.skywars.utilities.placeholders;
 
 import com.nymoout.skywars.SkyWars;
+import me.clip.placeholderapi.PlaceholderHook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import me.clip.placeholderapi.external.EZPlaceholderHook;
 
-public class SWRPlaceholderAPI extends EZPlaceholderHook {
+public class SWPlaceholderAPI extends PlaceholderHook {
 
 	private SkyWars sw;
 	
-	public SWRPlaceholderAPI(Plugin plugin) {
-		super(plugin, "sw");
+	public SWPlaceholderAPI(Plugin plugin) {
 		this.sw = (SkyWars) plugin;
 	}
 

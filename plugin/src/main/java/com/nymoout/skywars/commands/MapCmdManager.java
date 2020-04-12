@@ -20,17 +20,17 @@ public class MapCmdManager implements CommandExecutor {
         mapcmds.add(new CreateCmd("map"));
         mapcmds.add(new EditCmd("map"));
         mapcmds.add(new RegisterCmd("map"));
-        mapcmds.add(new com.nymoout.skywars.commands.maps.SaveCmd("map"));
+        mapcmds.add(new SaveCmd("map"));
         mapcmds.add(new UnregisterCmd("map"));
-        mapcmds.add(new com.nymoout.skywars.commands.maps.RefreshData("map"));
+        mapcmds.add(new RefreshData("map"));
         mapcmds.add(new NameCmd("map"));
-        mapcmds.add(new com.nymoout.skywars.commands.maps.DeleteCmd("map"));
-        mapcmds.add(new com.nymoout.skywars.commands.maps.MinimumCmd("map"));
+        mapcmds.add(new DeleteCmd("map"));
+        mapcmds.add(new MinimumCmd("map"));
         mapcmds.add(new CreatorCmd("map"));
         mapcmds.add(new ArenaCmd("map"));
-        mapcmds.add(new com.nymoout.skywars.commands.maps.AddSpawnCmd("map"));
-        mapcmds.add(new com.nymoout.skywars.commands.maps.ChestTypeCmd("map"));
-        mapcmds.add(new com.nymoout.skywars.commands.maps.LegacyLoadCmd("map"));
+        mapcmds.add(new AddSpawnCmd("map"));
+        mapcmds.add(new ChestTypeCmd("map"));
+        mapcmds.add(new LegacyLoadCmd("map"));
     }
 
     public boolean onCommand(CommandSender s, Command command, String label, String[] args) {

@@ -14,17 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartyCmdManager implements CommandExecutor {
+
     private List<BaseCmd> partycmds = new ArrayList<>();
 
     //Add New Commands Here
     public PartyCmdManager() {
-        partycmds.add(new com.nymoout.skywars.commands.party.AcceptCmd("party"));
+        partycmds.add(new AcceptCmd("party"));
         partycmds.add(new CreateCmd("party"));
-        partycmds.add(new com.nymoout.skywars.commands.party.DisbandCmd("party"));
-        partycmds.add(new com.nymoout.skywars.commands.party.InviteCmd("party"));
+        partycmds.add(new DisbandCmd("party"));
+        partycmds.add(new InviteCmd("party"));
         partycmds.add(new LeaveCmd("party"));
         partycmds.add(new NameCmd("party"));
-        partycmds.add(new com.nymoout.skywars.commands.party.InfoCmd("party"));
+        partycmds.add(new InfoCmd("party"));
         partycmds.add(new DeclineCmd("party"));
     }
 

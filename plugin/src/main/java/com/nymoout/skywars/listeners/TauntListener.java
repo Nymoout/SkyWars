@@ -2,6 +2,7 @@ package com.nymoout.skywars.listeners;
 
 import java.util.HashMap;
 
+import com.nymoout.skywars.enums.MatchState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,6 +28,9 @@ public class TauntListener implements Listener {
         if (gameMap == null) {
         	return;
         }
+        if (gameMap.getMatchState().equals(MatchState.WAITINGSTART)){
+        	return;
+		}
 		String uuid = e.getPlayer().getUniqueId().toString();
 		if (!player.isSneaking()) {
 			if (lastHandSwap.containsKey(uuid)) {
@@ -56,7 +60,7 @@ public class TauntListener implements Listener {
                         TauntOption taunt = (TauntOption) TauntOption.getPlayerOptionByKey(tauntName);
                         if (taunt != null) {
                             if (!taunt.getKey().equals("none")) {
-                                taunt.performTaunt(e.getPlayer());
+									taunt.performTaunt(e.getPlayer());
                             }
                         }
                         lastHandSwap.remove(uuid);

@@ -116,6 +116,15 @@ public class LobbyListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void onPlayerDamage(final EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            if (Util.get().isSpawnWorld(e.getEntity().getWorld())) {
+                e.setCancelled(true);
+            }
+        }
+    }
+
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
     public void onClick(final PlayerInteractEvent e) {
         if (Util.get().isSpawnWorld(e.getPlayer().getWorld())) {
@@ -138,7 +147,7 @@ public class LobbyListener implements Listener {
                         e.getPlayer().openInventory(joinMenu);
                     } else if (e.getItem().equals(SkyWars.getIM().getItem("autojoinselect"))) {
                         e.setCancelled(true);
-                        Util.get().playSound(e.getPlayer(), e.getPlayer().getLocation(), SkyWars.getCfg().getOpenJoinMenuSound(), 1, 1);
+                        Util.get().playSound(e.getPlayer(), e.getPlayer().getLocation(), SkyWars.getCfg().getConfirmeSelctionSound(), 1, 1);
                         e.getPlayer().performCommand("sw join");
                     }
                 }
@@ -204,15 +213,6 @@ public class LobbyListener implements Listener {
             }
             if (player.getLocation().getY() < 0) {
                 player.teleport(SkyWars.getCfg().getSpawn());
-            }
-        }
-    }
-
-    @EventHandler
-    public void onPlayerDamage(final EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player) {
-            if (Util.get().isSpawnWorld(e.getEntity().getWorld())) {
-                e.setCancelled(true);
             }
         }
     }

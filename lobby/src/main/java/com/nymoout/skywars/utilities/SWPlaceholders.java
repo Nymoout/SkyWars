@@ -6,12 +6,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-public class SWRPlaceholders extends EZPlaceholderHook {
+public class SWPlaceholders extends EZPlaceholderHook {
 
     private SkyWars sw;
 
-    public SWRPlaceholders(Plugin plugin) {
-        super(plugin, "swr");
+    public SWPlaceholders(Plugin plugin) {
+        super(plugin, "sw");
         this.sw = (SkyWars) plugin;
     }
 

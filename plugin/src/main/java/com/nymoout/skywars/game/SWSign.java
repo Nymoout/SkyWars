@@ -9,11 +9,11 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 
-public class SWRSign {
+public class SWSign {
     private String gameName;
     private Location location;
 
-    SWRSign(String name, Location loc) {
+    SWSign(String name, Location loc) {
         this.gameName = name;
         this.location = loc;
     }

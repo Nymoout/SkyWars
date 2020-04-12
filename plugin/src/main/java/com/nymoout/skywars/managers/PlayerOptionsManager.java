@@ -54,7 +54,7 @@ public class PlayerOptionsManager {
         }
         GlassColorOption.loadPlayerOptions();
         ParticleEffectOption.loadPlayerOptions();
-        com.nymoout.skywars.menus.playeroptions.ProjectileEffectOption.loadPlayerOptions();
+        ProjectileEffectOption.loadPlayerOptions();
         WinSoundOption.loadPlayerOptions();
         KillSoundOption.loadPlayerOptions();
         TauntOption.loadPlayerOptions();
@@ -103,5 +103,4 @@ public class PlayerOptionsManager {
         }
         return data;
     }
-
 }

@@ -17,8 +17,7 @@ import com.nymoout.skywars.game.PlayerData;
 import com.nymoout.skywars.listeners.*;
 import com.nymoout.skywars.managers.MatchManager;
 import com.nymoout.skywars.managers.WorldManager;
-import com.nymoout.skywars.menus.JoinMenu;
-import com.nymoout.skywars.menus.JoinSingleMenu;
+import com.nymoout.skywars.menus.*;
 import com.nymoout.skywars.menus.gameoptions.objects.GameKit;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -45,8 +44,8 @@ import com.nymoout.skywars.managers.Leaderboard;
 import com.nymoout.skywars.utilities.Messaging;
 import com.nymoout.skywars.utilities.holograms.HoloDisUtil;
 import com.nymoout.skywars.utilities.holograms.HologramsUtil;
-import com.nymoout.skywars.utilities.placeholders.SWRMVdWPlaceholder;
-import com.nymoout.skywars.utilities.placeholders.SWRPlaceholderAPI;
+import com.nymoout.skywars.utilities.placeholders.SWMVdWPlaceholder;
+import com.nymoout.skywars.utilities.placeholders.SWPlaceholderAPI;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -87,7 +86,7 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
         } catch (final Exception e) {
             e.printStackTrace();
             this.getLogger().severe("Could not find support for this CraftBukkit version: " + version + ".");
-            this.getLogger().info("Check for updates at https://www.spigotmc.org/resources/skywarsreloaded.3796/");
+           //this.getLogger().info("Check for updates at https://www.spigotmc.org/resources/skywarsreloaded.3796/");
             this.setEnabled(false);
             return;
         }
@@ -128,11 +127,11 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
 
         config = new Config();   
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-        	new SWRPlaceholderAPI(this).hook();
+        	new SWPlaceholderAPI(this);
         }
         
         if (Bukkit.getPluginManager().isPluginEnabled("MVdWPlaceholderAPI")) {
-        	new SWRMVdWPlaceholder(this);
+        	new SWMVdWPlaceholder(this);
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("PerWorldInventory")) {
@@ -277,19 +276,19 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
         if (SkyWars.getConfigManager().joinMenuEnabled() || SkyWars.getConfigManager().spectateMenuEnabled()) {
         	new JoinMenu();
 	        new JoinSingleMenu();
-			new com.nymoout.skywars.menus.JoinTeamMenu();
+			new JoinTeamMenu();
         }
         if (SkyWars.getConfigManager().spectateMenuEnabled()) {
-        	new com.nymoout.skywars.menus.SpectateMenu();
-	        new com.nymoout.skywars.menus.SpectateSingleMenu();
-            new com.nymoout.skywars.menus.SpectateTeamMenu();
+        	new SpectateMenu();
+	        new SpectateSingleMenu();
+            new SpectateTeamMenu();
         }
         
         getCommand("skywars").setExecutor(new CmdManager());
         getCommand("swkit").setExecutor(new KitCmdManager());
         getCommand("swmap").setExecutor(new MapCmdManager());
         if (config.partyEnabled()) {
-            getCommand("swparty").setExecutor(new PartyCmdManager());
+            getCommand("party").setExecutor(new PartyCmdManager());
         }
         if (getConfigManager().borderEnabled()) {
         	if (specObserver != null) {

@@ -19,12 +19,12 @@ public class KitCmdManager implements CommandExecutor {
         kitcmds.add(new EnableCmd("kit"));
         kitcmds.add(new IconCmd("kit"));
         kitcmds.add(new LockedIconCmd("kit"));
-        kitcmds.add(new com.nymoout.skywars.commands.kits.LoadCmd("kit"));
-        kitcmds.add(new com.nymoout.skywars.commands.kits.LoreCmd("kit"));
+        kitcmds.add(new LoadCmd("kit"));
+        kitcmds.add(new LoreCmd("kit"));
         kitcmds.add(new NameCmd("kit"));
         kitcmds.add(new PositionCmd("kit"));
-        kitcmds.add(new com.nymoout.skywars.commands.kits.PermCmd("kit"));
-        kitcmds.add(new com.nymoout.skywars.commands.kits.UpdateCmd("kit"));
+        kitcmds.add(new PermCmd("kit"));
+        kitcmds.add(new UpdateCmd("kit"));
         kitcmds.add(new ListCmd("kit"));
     }
 

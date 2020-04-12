@@ -1,8 +1,7 @@
 package com.nymoout.skywars.commands;
 
 import com.nymoout.skywars.SkyWars;
-import com.nymoout.skywars.commands.admin.ChestEditCmd;
-import com.nymoout.skywars.commands.admin.SetSpawnCmd;
+import com.nymoout.skywars.commands.admin.*;
 import com.nymoout.skywars.commands.player.*;
 import com.nymoout.skywars.utilities.Messaging;
 import com.nymoout.skywars.utilities.Util;
@@ -14,47 +13,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CmdManager implements CommandExecutor {
+
     private List<BaseCmd> admincmds = new ArrayList<>();
     private List<BaseCmd> pcmds = new ArrayList<>();
 
     public CmdManager() {
-        admincmds.add(new com.nymoout.skywars.commands.admin.ReloadCmd("sw"));
-        admincmds.add(new com.nymoout.skywars.commands.admin.ChestAddCmd("sw"));
+        admincmds.add(new ReloadCmd("sw"));
+        admincmds.add(new ChestAddCmd("sw"));
         admincmds.add(new ChestEditCmd("sw"));
-        admincmds.add(new com.nymoout.skywars.commands.admin.SetStatsCmd("sw"));
-        admincmds.add(new com.nymoout.skywars.commands.admin.ClearStatsCmd("sw"));
+        admincmds.add(new SetStatsCmd("sw"));
+        admincmds.add(new ClearStatsCmd("sw"));
         admincmds.add(new SetSpawnCmd("sw"));
-        admincmds.add(new com.nymoout.skywars.commands.admin.StartCmd("sw"));
-        admincmds.add(new com.nymoout.skywars.commands.admin.UpdateTopCmd("sw"));
-        admincmds.add(new com.nymoout.skywars.commands.admin.HoloAddCmd("sw"));
-        admincmds.add(new com.nymoout.skywars.commands.admin.HoloRemoveCmd("sw"));
-
+        admincmds.add(new StartCmd("sw"));
+        admincmds.add(new UpdateTopCmd("sw"));
+        admincmds.add(new HoloAddCmd("sw"));
+        admincmds.add(new HoloRemoveCmd("sw"));
         pcmds.add(new SWJoinCmd("sw"));
-        pcmds.add(new com.nymoout.skywars.commands.player.SWQuitCmd("sw"));
+        pcmds.add(new SWQuitCmd("sw"));
         pcmds.add(new SWStatsCmd("sw"));
         pcmds.add(new SWTopCmd("sw"));
         pcmds.add(new SWOptionsCmd("sw"));
-        pcmds.add(new com.nymoout.skywars.commands.player.SWLeaveSpecCmd("sw"));
-        pcmds.add(new com.nymoout.skywars.commands.player.SWReJoinCmd("sw"));
-        pcmds.add(new com.nymoout.skywars.commands.player.SWSpectateCmd("sw"));
+        pcmds.add(new SWLeaveSpecCmd("sw"));
+        pcmds.add(new SWReJoinCmd("sw"));
+        pcmds.add(new SWSpectateCmd("sw"));
 
         if (SkyWars.getConfigManager().winsoundMenuEnabled()) {
-            pcmds.add(new com.nymoout.skywars.commands.player.SWWinsoundCmd("sw"));
+            pcmds.add(new SWWinsoundCmd("sw"));
         }
         if (SkyWars.getConfigManager().killsoundMenuEnabled()) {
-            pcmds.add(new com.nymoout.skywars.commands.player.SWKillsoundCmd("sw"));
+            pcmds.add(new SWKillsoundCmd("sw"));
         }
         if (SkyWars.getConfigManager().tauntsMenuEnabled()) {
             pcmds.add(new SWTauntCmd("sw"));
         }
         if (SkyWars.getConfigManager().projectileMenuEnabled()) {
-            pcmds.add(new com.nymoout.skywars.commands.player.SWProjectileCmd("sw"));
+            pcmds.add(new SWProjectileCmd("sw"));
         }
         if (SkyWars.getConfigManager().particleMenuEnabled()) {
-            pcmds.add(new com.nymoout.skywars.commands.player.SWParticleCmd("sw"));
+            pcmds.add(new SWParticleCmd("sw"));
         }
         if (SkyWars.getConfigManager().glassMenuEnabled()) {
-            pcmds.add(new com.nymoout.skywars.commands.player.SWGlassCmd("sw"));
+            pcmds.add(new SWGlassCmd("sw"));
         }
 
     }

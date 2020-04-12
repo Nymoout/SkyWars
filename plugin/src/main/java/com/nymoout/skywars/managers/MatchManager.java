@@ -16,10 +16,7 @@ import com.nymoout.skywars.menus.playeroptions.KillSoundOption;
 import com.nymoout.skywars.menus.playeroptions.ParticleEffectOption;
 import com.nymoout.skywars.menus.playeroptions.WinSoundOption;
 import com.nymoout.skywars.menus.playeroptions.objects.ParticleEffect;
-import com.nymoout.skywars.utilities.Messaging;
-import com.nymoout.skywars.utilities.Party;
-import com.nymoout.skywars.utilities.Util;
-import com.nymoout.skywars.utilities.VaultUtils;
+import com.nymoout.skywars.utilities.*;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -228,10 +225,7 @@ public class MatchManager {
         player.setScoreboard(gameMap.getGameBoard().getScoreboard());
 
         Util.get().clear(player);
-        player.getInventory().setBoots(new ItemStack(Material.AIR, 1));
-        player.getInventory().setChestplate(new ItemStack(Material.AIR, 1));
-        player.getInventory().setHelmet(new ItemStack(Material.AIR, 1));
-        player.getInventory().setLeggings(new ItemStack(Material.AIR, 1));
+        Util.get().clearArmor(player);
 
         if (SkyWars.getConfigManager().areKitsEnabled()) {
             ItemStack kitItem = SkyWars.getItemsManager().getItem("kitvote");
@@ -442,7 +436,8 @@ public class MatchManager {
                             new BukkitRunnable() {
                                 @Override
                                 public void run() {
-                                    Util.get().sendActionBar(win, new Messaging.MessageFormatter().setVariable("xp", "" + multiplier * SkyWars.getConfigManager().getWinnerXP()).format("game.win-actionbar"));
+                                    Util.get().sendActionBar(win, new Messaging.MessageFormatter().setVariable("xp", ""
+                                            + multiplier * SkyWars.getConfigManager().getWinnerXP()).format("game.win-actionbar"));
                                     Util.get().doCommands(SkyWars.getConfigManager().getWinCommands(), win);
                                     win.setAllowFlight(true);
                                     win.setFlying(true);
@@ -468,6 +463,7 @@ public class MatchManager {
                         for (PlayerCard pCard : winners.getPlayerCards()) {
                             Player win = pCard.getPlayer();
                             if (win != null) {
+                                Serializers.sendMessageAutoJoinToWinners(win);
                                 SkyWars.get().getServer().broadcastMessage(new Messaging.MessageFormatter()
                                         .setVariable("player1", winner).setVariable("map", map).format("game.broadcast-win"));
                                 if (SkyWars.getConfigManager().titlesEnabled()) {
@@ -806,10 +802,8 @@ public class MatchManager {
                         PlayerData.getPlayerData().add(new PlayerData(player));
                     }
                     Util.get().clear(player);
-                    player.getInventory().setBoots(new ItemStack(Material.AIR, 1));
-                    player.getInventory().setChestplate(new ItemStack(Material.AIR, 1));
-                    player.getInventory().setHelmet(new ItemStack(Material.AIR, 1));
-                    player.getInventory().setLeggings(new ItemStack(Material.AIR, 1));
+                    Util.get().clearArmor(player);
+
                     player.setGameMode(GameMode.SPECTATOR);
                     player.setScoreboard(gameMap.getGameBoard().getScoreboard());
 
@@ -818,13 +812,23 @@ public class MatchManager {
                     ItemStack exitItem = new ItemStack(Material.REDSTONE, 1);
                     ItemMeta exit = exitItem.getItemMeta();
                     exit.setDisplayName(new Messaging.MessageFormatter().format("spectate.exititemname"));
-                    List<String> lore = new ArrayList<>();
-                    lore.add(new Messaging.MessageFormatter().format("spectate.exititemlore"));
-                    exit.setLore(lore);
+                    List<String> loreExit = new ArrayList<>();
+                    loreExit.add(new Messaging.MessageFormatter().format("spectate.exititemlore"));
+                    exit.setLore(loreExit);
                     exitItem.setItemMeta(exit);
+
+                    ItemStack autoItem = new ItemStack(Material.NETHER_STAR, 1);
+                    ItemMeta auto = autoItem.getItemMeta();
+                    auto.setDisplayName(new Messaging.MessageFormatter().format("spectate.autojoinitemname"));
+                    List<String> loreJoin = new ArrayList<>();
+                    loreJoin.add(new Messaging.MessageFormatter().format("spectate.autojoinitemlore"));
+                    auto.setLore(loreJoin);
+                    autoItem.setItemMeta(auto);
+
                     player.getInventory().setItem(8, exitItem);
+                    player.getInventory().setItem(0, autoItem);
                     player.sendMessage(new Messaging.MessageFormatter().format("spectate.startmessage"));
-                    player.sendMessage(new Messaging.MessageFormatter().format("spectate.startmessage2"));
+                    Serializers.sendMessageAutoJoinToSpectators(player);
                     if (debug) {
                         Util.get().logToFile(debugName + ChatColor.YELLOW + player.getName() + " has been added to spectators");
                     }
@@ -873,4 +877,6 @@ public class MatchManager {
         }
         this.message(gameMap, new Messaging.MessageFormatter().setVariable("time", time).format("timer.wait-timer"));
     }
+
+
 }

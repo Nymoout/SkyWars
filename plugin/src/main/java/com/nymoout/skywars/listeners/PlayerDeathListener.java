@@ -40,7 +40,6 @@ public class PlayerDeathListener implements Listener {
         final DamageCause dCause = damageCause;
         player.getWorld().strikeLightningEffect(player.getLocation());
         e.setDeathMessage("");
-        Serializers.sendMessageAutoJoin(player);
         MatchManager.get().playerLeave(player, dCause, false, true, true);
     }
 

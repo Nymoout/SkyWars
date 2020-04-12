@@ -119,6 +119,8 @@ spectate:
   exititemlore: '&bClick to leave spectator mode'
   playeritemlore: '&bClick to teleport to {player}'
   stayinarena: '&cPlease stay within the bouncewars Arena!'
+  autojoinitemname: '&a&lPlay again &8&l●'
+  autojoinitemlore: '&fClick to join to another machs'
 menu:
   usetaunt-menu-title: '&5Taunt Menu'
   usetaunt-settaunt: '&aClick to Set Your Taunt'

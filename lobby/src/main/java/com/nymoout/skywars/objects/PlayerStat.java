@@ -77,7 +77,6 @@ public class PlayerStat {
                     final Player player = SkyWars.get().getServer().getPlayer(UUID.fromString(uuid));
                     if (player != null) {
                         new BukkitRunnable() {
-                            @SuppressWarnings("deprecation")
                             @Override
                             public void run() {
                                 if (Util.get().isSpawnWorld(player.getWorld())) {
@@ -331,6 +330,7 @@ public class PlayerStat {
         PlayerStat ps = PlayerStat.getPlayerStats(player);
         String killdeath;
         String winloss;
+        String online = Integer.toString(Bukkit.getServer().getOnlinePlayers().size());
         if (ps.getWins() == 0) {
             winloss = "0.00";
         } else {
@@ -353,7 +353,7 @@ public class PlayerStat {
                 .setVariable("winloss", winloss)
                 .setVariable("balance", "" + getBalance(player))
                 .setVariable("player_name", ps.getPlayerName())
-                .setVariable("online_players", Integer.toString(Bukkit.getServer().getOnlinePlayers().size()))
+                .setVariable("online_players", online)
                 .format(lineNum);
     }
 

@@ -18,16 +18,16 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerTeleportListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerTeleport(final PlayerTeleportEvent a1) {
-        Player player = a1.getPlayer();
+    public void onPlayerTeleport(final PlayerTeleportEvent e) {
+        Player player = e.getPlayer();
         final GameMap gameMap = MatchManager.get().getPlayerMap(player);
         if (gameMap == null) {
             if (SkyWars.getConfigManager().getSpawn() != null) {
-                if (!a1.getFrom().getWorld().equals(SkyWars.getConfigManager().getSpawn().getWorld()) && a1.getTo().getWorld().equals(SkyWars.getConfigManager().getSpawn().getWorld())) {
-                    PlayerStat.updatePlayer(a1.getPlayer().getUniqueId().toString());
+                if (!e.getFrom().getWorld().equals(SkyWars.getConfigManager().getSpawn().getWorld()) && e.getTo().getWorld().equals(SkyWars.getConfigManager().getSpawn().getWorld())) {
+                    PlayerStat.updatePlayer(e.getPlayer().getUniqueId().toString());
                     return;
                 }
-                if (a1.getFrom().getWorld().equals(SkyWars.getConfigManager().getSpawn().getWorld()) && !a1.getTo().getWorld().equals(SkyWars.getConfigManager().getSpawn().getWorld())) {
+                if (e.getFrom().getWorld().equals(SkyWars.getConfigManager().getSpawn().getWorld()) && !e.getTo().getWorld().equals(SkyWars.getConfigManager().getSpawn().getWorld())) {
                     if (SkyWars.getConfigManager().lobbyBoardEnabled()) {
                         player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
                     }
@@ -55,13 +55,13 @@ public class PlayerTeleportListener implements Listener {
                 }
             }
         } else {
-            if (a1.getCause().equals(TeleportCause.END_PORTAL) || player.hasPermission("sw.opteleport") || a1.getTo().getWorld().equals(a1.getFrom().getWorld())) {
-                a1.setCancelled(false);
+            if (e.getCause().equals(TeleportCause.END_PORTAL) || player.hasPermission("sw.opteleport") || e.getTo().getWorld().equals(e.getFrom().getWorld())) {
+                e.setCancelled(false);
             } else {
-                if (a1.getCause().equals(TeleportCause.ENDER_PEARL) && gameMap.getMatchState() != MatchState.ENDING && gameMap.getMatchState() != MatchState.WAITINGSTART) {
-                    a1.setCancelled(false);
+                if (e.getCause().equals(TeleportCause.ENDER_PEARL) && gameMap.getMatchState() != MatchState.ENDING && gameMap.getMatchState() != MatchState.WAITINGSTART) {
+                    e.setCancelled(false);
                 } else {
-                    a1.setCancelled(true);
+                    e.setCancelled(true);
                 }
             }
         }

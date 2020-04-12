@@ -14,13 +14,7 @@ import java.util.concurrent.TimeUnit;
 import com.nymoout.skywars.SkyWars;
 import com.nymoout.skywars.managers.MatchManager;
 import com.nymoout.skywars.utilities.Messaging;
-import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -165,6 +159,13 @@ public class Util {
         	player.removePotionEffect(a1.getType());
         }
     }
+
+    public void clearArmor(final Player player){
+		player.getInventory().setBoots(new ItemStack(Material.AIR, 1));
+		player.getInventory().setChestplate(new ItemStack(Material.AIR, 1));
+		player.getInventory().setHelmet(new ItemStack(Material.AIR, 1));
+		player.getInventory().setLeggings(new ItemStack(Material.AIR, 1));
+	}
     
     public boolean isBusy(UUID uuid) {
         Player player = SkyWars.get().getServer().getPlayer(uuid);

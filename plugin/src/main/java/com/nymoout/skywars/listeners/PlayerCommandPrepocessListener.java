@@ -17,12 +17,6 @@ public class PlayerCommandPrepocessListener implements Listener {
         GameMap gMap = MatchManager.get().getSpectatorMap(e.getPlayer());
         String[] splited = e.getMessage().split("\\s+");
         if (gMap != null) {
-            if (splited[0].equalsIgnoreCase("/spawn")) {
-                e.setCancelled(true);
-                gMap.getSpectators().remove(e.getPlayer().getUniqueId());
-                MatchManager.get().removeSpectator(e.getPlayer());
-                return;
-            }
             if (SkyWars.getConfigManager().disableCommandsSpectate()) {
                 if (e.getPlayer().hasPermission("sw.allowcommands")) {
                     return;
@@ -43,7 +37,6 @@ public class PlayerCommandPrepocessListener implements Listener {
                 return;
             }
         }
-
         if (MatchManager.get().getPlayerMap(e.getPlayer()) != null) {
             if (e.getPlayer().hasPermission("sw.allowcommands")) {
                 return;
@@ -61,6 +54,12 @@ public class PlayerCommandPrepocessListener implements Listener {
             }
             e.getPlayer().sendMessage(new Messaging.MessageFormatter().format("game.command-disabled"));
             e.setCancelled(true);
+        }
+        if (gMap == null) {
+            if (splited[0].equalsIgnoreCase("/spawn")) {
+                e.setCancelled(true);
+                e.getPlayer().teleport(SkyWars.getConfigManager().getSpawn());
+            }
         }
     }
 }

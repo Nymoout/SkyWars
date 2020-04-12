@@ -59,6 +59,7 @@ public class Config {
     private List<String> gameServers;
 
     private Map<String, String> materials = new HashMap<String, String>();
+
     private final List<String> itemNames = Arrays.asList("joinselect",
             "nopermission",
             "optionselect",

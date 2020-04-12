@@ -3,11 +3,11 @@ package com.nymoout.skywars.menus;
 import com.nymoout.skywars.SkyWars;
 import com.nymoout.skywars.enums.MatchState;
 import com.nymoout.skywars.game.GameMap;
-import com.nymoout.skywars.game.SWRSign;
+import com.nymoout.skywars.game.SWSign;
 import com.nymoout.skywars.game.cages.CageType;
 import com.nymoout.skywars.listeners.ChatListener;
 import com.nymoout.skywars.managers.MatchManager;
-import com.nymoout.skywars.utilities.JSONMessage;
+import com.nymoout.skywars.utilities.ChatSerializerUtil;
 import com.nymoout.skywars.utilities.Messaging;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -207,7 +207,7 @@ public class ArenaMenu {
                 } else if (event.getClick().equals(ClickType.LEFT) && event.getSlot() == 8) {
                     player.closeInventory();
                     for (int i = 1; i <= gMap.getSigns().size(); i++) {
-                        SWRSign swSign = gMap.getSigns().get(i - 1);
+                        SWSign swSign = gMap.getSigns().get(i - 1);
                         BlockState bs = swSign.getLocation().getBlock().getState();
                         Sign sign;
                         if (bs instanceof Sign) {
@@ -239,11 +239,18 @@ public class ArenaMenu {
                             int y = loc.getBlockY();
                             int z = loc.getBlockZ();
 
-                            JSONMessage.create("Sign " + i + ": " + world.getName() + " - " + block.getLocation().getBlockX() + ", " + block.getLocation().getBlockY() + ", " + block.getLocation().getBlockZ())
+                            ChatSerializerUtil sings = new ChatSerializerUtil("Sign " + i + ": " + world.getName()
+                                    + " - " + block.getLocation().getBlockX() + ", " + block.getLocation().getBlockY()
+                                    + ", " + block.getLocation().getBlockZ());
+                            sings.addHoverEvent(ChatSerializerUtil.SerializerAction.SHOW_TEXT, "Click to teleport");
+                            sings.addClickEvent(ChatSerializerUtil.SerializerAction.RUN_COMMAND, "/teleport " + x + " " + y + " " + z);
+                            sings.send(player);
+
+                           /* JSONMessage.create("Sign " + i + ": " + world.getName() + " - " + block.getLocation().getBlockX() + ", " + block.getLocation().getBlockY() + ", " + block.getLocation().getBlockZ())
                                     .color(ChatColor.GOLD)
                                     .tooltip("Click to teleport")
                                     .runCommand("/teleport " + x + " " + y + " " + z)
-                                    .color(ChatColor.GOLD).send(player);
+                                    .color(ChatColor.GOLD).send(player);*/
                         }
 
                     }

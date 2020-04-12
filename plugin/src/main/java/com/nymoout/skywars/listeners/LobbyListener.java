@@ -44,6 +44,16 @@ public class LobbyListener implements Listener {
         }
     }
 
+
+    @EventHandler
+    public void onPlayerDamage(final EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            if (Util.get().isSpawnWorld(e.getEntity().getWorld())) {
+                e.setCancelled(true);
+            }
+        }
+    }
+
     @EventHandler
     public void onWeatherChange(final WeatherChangeEvent e) {
         if (SkyWars.getConfigManager().protectLobby() && Util.get().isSpawnWorld(e.getWorld())) {
@@ -232,14 +242,6 @@ public class LobbyListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void onPlayerDamage(final EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player) {
-            if (Util.get().isSpawnWorld(e.getEntity().getWorld())) {
-                e.setCancelled(true);
-            }
-        }
-    }
 
     @EventHandler
     public void onPlayerLosesFood(final FoodLevelChangeEvent e) {
