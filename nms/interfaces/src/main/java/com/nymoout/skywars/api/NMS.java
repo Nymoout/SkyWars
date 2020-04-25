@@ -1,5 +1,6 @@
 package com.nymoout.skywars.api;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +23,8 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
 public interface NMS {
+
+	public void sendTab(Player player, String header, String footer);
 
 	public void respawnPlayer(Player player);
 

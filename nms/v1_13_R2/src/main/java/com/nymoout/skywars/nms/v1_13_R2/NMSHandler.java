@@ -1,5 +1,6 @@
 package com.nymoout.skywars.nms.v1_13_R2;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -34,7 +35,30 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
 public class NMSHandler implements NMS {
-	
+
+	@Override
+	public void sendTab(Player player, String header, String footer) {
+		CraftPlayer craftplayer = (CraftPlayer)player;
+		PlayerConnection connection = craftplayer.getHandle().playerConnection;
+		IChatBaseComponent headerJSON = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + header + "\"}");
+		IChatBaseComponent footerJSON = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + footer + "\"}");
+		PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
+
+		try {
+			Field headerField = packet.getClass().getDeclaredField("a");
+			headerField.setAccessible(true);
+			headerField.set(packet, headerJSON);
+			headerField.setAccessible(!headerField.isAccessible());
+			Field footerField = packet.getClass().getDeclaredField("b");
+			footerField.setAccessible(true);
+			footerField.set(packet, footerJSON);
+			footerField.setAccessible(!footerField.isAccessible());
+		} catch (Exception var11) {
+			var11.printStackTrace();
+		}
+		connection.sendPacket(packet);
+	}
+
 	public void respawnPlayer(Player player) {
 		((CraftServer)Bukkit.getServer()).getHandle().moveToWorld(((CraftPlayer)player).getHandle(), ((CraftPlayer)player).getHandle().dimension, false);
 	}
