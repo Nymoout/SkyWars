@@ -101,6 +101,7 @@ permissions:
       sw.top: true
       sw.quit: true
       sw.rejoin: true
+      sw.rejoinwiner: true
       sw.leave: true
   sw.join: 
     description: Allows a player to use sw join command.
@@ -118,6 +119,9 @@ permissions:
     description: Allows a player to use sw quit command.
     default: true
   sw.rejoin:
+    description: Allows a player to use sw rejoin command.
+    default: true
+  sw.rejoinwiner:
     description: Allows a player to use sw rejoin command.
     default: true
   sw.leave:

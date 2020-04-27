@@ -47,6 +47,5 @@ public class PlayerJoinListener implements Listener {
             }
         }.runTaskLater(SkyWars.get(), 1);
         PlayerStat.getPlayers().add(new PlayerStat(e.getPlayer()));
-        SkyWars.getNMS().sendTab(e.getPlayer(), (new Messaging.MessageFormatter()).format("tab.header"), (new Messaging.MessageFormatter()).format("tab.footer"));
     }
 }

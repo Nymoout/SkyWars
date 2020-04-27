@@ -452,6 +452,7 @@ helpList:
     clearstats: '&a/sw clearstats &e[playername] &e- &2Clears a SkyWars players stats'
     join: '&a/sw join &e- &2Join a SkyWars match'
     rejoin: '&a/sw rejoin &e- &2rejoin a SkyWars match'
+    rejoinwiner: '&a/sw rejoin &e- &2rejoin a winner SkyWars'
     leave: '&a/sw leave &e- &2leave a SkyWars match'
     quit: '&a/sw quit &e- &2Quits from the current game'
     spectate: '&a/sw spectate [playername/mapname] &e- &2Spectates a match' 

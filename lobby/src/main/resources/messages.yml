@@ -367,3 +367,6 @@ helpList:
   unregister: '&a/sw unregister &e[mapname] &e- &2Unregisters a map named &e[mapname]'
   save: '&a/sw save &e[mapname] &e- &2Saves a open map named &e[mapname]'
   footer: '&7-----------------------------------------------------'
+tab:
+  header: '\n&8&l&m-----------**-------------------\n&6&lEstas jugando en Strafe \n&7Compra rangos con /tienda\n&f\n&c&lJugadores'
+  footer: '\n&2&lServer IP:\n&fmc.strafent.club\n&8&l&m----------------------**--------'

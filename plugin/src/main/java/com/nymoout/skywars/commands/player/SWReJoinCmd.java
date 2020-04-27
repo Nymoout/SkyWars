@@ -17,7 +17,7 @@ public class SWReJoinCmd extends BaseCmd {
 
     @Override
     public boolean run() {
-        player.performCommand("sw leave");
+        player.performCommand("sw quit");
         reJoinGame(player);
         return true;
     }
